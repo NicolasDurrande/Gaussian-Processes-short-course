@@ -1,0 +1,55 @@
+\documentclass[12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{mathpazo} % math & rm
+% \linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+\usepackage{amsthm,amssymb,amsbsy,amsmath,amsfonts,amssymb,amscd}
+\usepackage{dsfont}
+\usepackage{tasks}
+\usepackage{enumitem}
+\usepackage[top=2cm, bottom=3cm, left=3cm , right=3cm]{geometry}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\begin{document}
+\begin{center}
+	\rule{\textwidth}{1pt}
+	\\ \ \\
+	{\LARGE \textbf{Lab 4 -- Efficient global optimization}}\\ 
+	\vspace{3mm}
+	{\large Short course on Statistical modelling for optimization\\ \vspace{3mm}}
+	{\normalsize N. Durrande, Universidad Tecnol\'ogica de Pereira, 2015}\\ 
+	\vspace{3mm}
+	\rule{\textwidth}{1pt}
+	\vspace{5mm}
+\end{center}
+The aim of this lab session is to get the best possible helicopter.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data}
+Some data from one of the group is provided, as well as one GPR model. If you are not confidemt in your data or in your model, feel free to use them. 
+
+% \subsection*{Questions}
+\paragraph{Q1.} A function \texttt{EI} returning the expected improvement is provided in the file \emph{ShortCourse\_lab4.py}. However, this function is only valid for data that is not noisy. Modify it accordingly using one of the two methods discussed during the lecture.
+
+\paragraph{Q2.} Before computing/optimizing the expected improvement on your data, there is one thing you should not forget... what is it?
+
+\paragraph{Q3.} Find the point that maximises the expected improvement. The library\linebreak \texttt{scipy.optimize} should be useful.
+
+\paragraph{Q4.} Print the corresponding helicopter (check first that it satisfies the constrains).
+
+\paragraph{Q5.} Run the experiment and update your model
+
+\paragraph{Q6.} Loop over Questions 3 to 5. Do not forget to indicate in your report the best parmeters you obtained and the actual recorded time!
+
+
+
+\end{document}

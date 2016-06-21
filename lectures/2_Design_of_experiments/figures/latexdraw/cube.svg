@@ -1,0 +1,88 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:latexdraw="http://latexdraw.sourceforge.net/namespaces/latexdraw"
+    version="1.1" baseProfile="full">
+    <g>
+        <g latexdraw:type="joinedLines" id="id460594005">
+            <polyline points="190.0,290.0 390.0,290.0 "
+                stroke-width="2.0" stroke="black"
+                latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-460594005)"/>
+        </g>
+        <g latexdraw:type="joinedLines" id="id1179238558">
+            <polyline points="190.0,290.0 290.0,240.0 "
+                stroke-width="2.0" stroke="black"
+                latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-1179238558)"/>
+        </g>
+        <g latexdraw:type="joinedLines" id="id2136338279">
+            <polyline
+                points="190.08167707594288,289.9999666442708 189.91832292405712,90.00003335572933 "
+                stroke-width="2.0" stroke="black"
+                latexdraw:rotationAngle="4.71238898038469" marker-end="url(#arrow1-2136338279)"/>
+        </g>
+        <g latexdraw:type="joinedLines" id="id2010488359">
+            <polyline points="190.0,120.0 370.0,120.0 370.0,290.0 "
+                stroke-width="1.0" stroke="black" fill="none" latexdraw:rotationAngle="0.0"/>
+        </g>
+        <g latexdraw:type="joinedLines" id="id1187311248">
+            <polyline points="270.0,80.0 450.0,80.0 450.0,250.0 "
+                stroke-width="1.0" stroke="black" fill="none" latexdraw:rotationAngle="0.0"/>
+        </g>
+        <g latexdraw:type="joinedLines" id="id433259692">
+            <polyline
+                points="190.0,120.0 270.0,80.0 270.0,250.0 450.0,250.0 370.0,290.0 "
+                stroke-width="1.0" stroke="black" fill="none" latexdraw:rotationAngle="0.0"/>
+        </g>
+        <g latexdraw:type="joinedLines" id="id662405979">
+            <polyline points="370.0,120.0 450.0,80.0 450.0,80.0 "
+                stroke-width="1.0" stroke="black" fill="none" latexdraw:rotationAngle="0.0"/>
+        </g>
+        <g latexdraw:type="text" id="id1117359852" fill="black" latexdraw:position="bl">
+            <text x="390.0" y="310.0"><![CDATA[\LARGE $x_1$]]></text>
+        </g>
+        <g latexdraw:type="text" id="id910523036" fill="black" latexdraw:position="bl">
+            <text x="290.0" y="240.0"><![CDATA[\Large $x_2$]]></text>
+        </g>
+        <g latexdraw:type="text" id="id1426815489" fill="black" latexdraw:position="bl">
+            <text x="190.0" y="90.0"><![CDATA[\LARGE $x_3$]]></text>
+        </g>
+    </g>
+    <defs>
+        <marker overflow="visible" orient="auto" id="arrow1-460594005">
+            <path
+                d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -4.652083333333334 0.0 L -4.652083333333334 -1.6614583333333335 z "
+                latexdraw:arrSizeNum="2.0" fill="black"/>
+        </marker>
+        <marker overflow="visible" orient="auto" id="arrow1-1179238558">
+            <path
+                d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -4.652083333333334 0.0 L -4.652083333333334 -1.6614583333333335 z "
+                latexdraw:arrSizeNum="2.0" fill="black"/>
+        </marker>
+        <marker overflow="visible" orient="auto" id="arrow1-2136338279">
+            <path
+                d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -4.652083333333334 0.0 L -4.652083333333334 -1.6614583333333335 z "
+                latexdraw:arrSizeNum="2.0" fill="black"/>
+        </marker>
+    </defs>
+    <metadata>
+        <latexdraw:metadata>
+            <latexdraw:latexIncludes><![CDATA[
+]]></latexdraw:latexIncludes>
+            <latexdraw:displayXScale>true</latexdraw:displayXScale>
+            <latexdraw:displayYScale>true</latexdraw:displayYScale>
+            <latexdraw:unit>CM</latexdraw:unit>
+            <latexdraw:zoom>1.0</latexdraw:zoom>
+            <latexdraw:magneticGridStyle>CUSTOMISED</latexdraw:magneticGridStyle>
+            <latexdraw:gridGap>10</latexdraw:gridGap>
+            <latexdraw:magneticGrid>true</latexdraw:magneticGrid>
+            <latexdraw:version>3.3.1</latexdraw:version>
+            <latexdraw:size>
+                <latexdraw:width>1553</latexdraw:width>
+                <latexdraw:height>837</latexdraw:height>
+            </latexdraw:size>
+            <latexdraw:position>
+                <latexdraw:x>282.0</latexdraw:x>
+                <latexdraw:y>55.0</latexdraw:y>
+            </latexdraw:position>
+        </latexdraw:metadata>
+    </metadata>
+</svg>

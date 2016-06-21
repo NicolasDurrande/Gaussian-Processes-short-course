@@ -1,0 +1,62 @@
+\documentclass[12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{mathpazo} % math & rm
+% \linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+\usepackage{amsthm,amssymb,amsbsy,amsmath,amsfonts,amssymb,amscd}
+\usepackage{dsfont}
+\usepackage{tasks}
+\usepackage{enumitem}
+\usepackage[top=2cm, bottom=3cm, left=3cm , right=3cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\begin{document}
+\begin{center}
+	\rule{\textwidth}{1pt}
+	\\ \ \\
+	{\LARGE \textbf{Lab 2 -- Design of Experiments}}\\ 
+	\vspace{3mm}
+	{\large Short course on Statistical modelling for optimization\\ \vspace{3mm}}
+	{\normalsize N. Durrande, Universidad Tecnol\'ogica de Pereira, 2015}\\ 
+	\vspace{3mm}
+	\rule{\textwidth}{1pt}
+	\vspace{5mm}
+\end{center}
+The first half of this lab session will be dedicated to designing the best possible DoE. The second one, we will run the actual experiments. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Design of experiments}
+The aim of this section is to define a DoE of 40 points over $(0,1)^4$ that shows good space filling properties and good projection properties. Some useful functions (such as \texttt{discrepancy}, \texttt{minimax}, \texttt{maximin}, \texttt{IMSE}) are provided in the file \texttt{lab2.py}. The file \texttt{SobolSequence.py} will also be of particular interest to generate low discrepancy sequences. 
+
+% \subsection*{Questions}
+\paragraph{Q1.} Write a function that implements a Latin Hypercube Design. The function should take as parameters the number of points $n$ and the dimension $d$. It should return a np.array with shape $(n,d)$.
+
+\paragraph{Q2.} Write a function that returns a Centroidal Voronoi Tesselation. You may use a k-means or a McQueen algorithm. The inputs and outputs should be as in Q1.
+
+\paragraph{Q3.} Generate various DoE using the functions you just wrote (you may also consider \texttt{SobolSequence}). 
+
+\paragraph{Q4.} Choose your favourite DoE using the various space filling criteria. Do not forget to test the projections on some variables. Justify your choice in the report. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Running the experiments}
+
+\paragraph{Step 1.} Convert your DoE on $(0,1)^4$ to the hyper-rectangle you defined during the last lab session.
+
+\paragraph{Step 2.} If you have changed the parameterization of the problem, convert the set of points to the initial space $w_l,\ w_w,\ t_l,\ a_l$. You should obtain a np.array of shape $(40,4)$. The following constrains on the design should be respected: $w_l + t_l + a_l \leq 31.6cm$, $a_l > 2.5cm$, $t_l > 2.5cm$ and $w_w < 10.1$.
+
+\paragraph{Step 3.} Execute the function \texttt{writeLaTeX} for your design. It will generate a file `helicopter.tex'.
+
+\paragraph{Step 4.} Run a latex compiler to transform the .tex file into a pdf. Note that the compiler must be able to deal with ps-pictures and LaTeX->PS->pdf is recommended.
+
+\paragraph{Step 5.} Print the pdf document and start making the helicopters! Use two paper-clips to fix the `arms' on the `tail'. These paper-clips are important, they also give stability to the helicopter.
+
+\paragraph{Step 6.} Go to the launching area and throw each helicopter 3 times. Record carefully each falling time.
+
+\end{document}
