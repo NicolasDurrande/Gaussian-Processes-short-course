@@ -9,8 +9,8 @@
 \input{../style.tex} 
 
 \title[Short course on Statistical Modelling for Optimization -- lecture 1/4]{ \small Short course Statistical Modelling for Optimization -- lecture 1/4 \\ \vspace{3mm} \LARGE Statistical models in engineering}
-\institute[Mines St-\'Etienne]{Nicolas Durrande (durrande@emse.fr) -- Mines St-\'Etienne (France)}
-\author[Pereira, February 2015]{February 2015, Universidad Tecnol\'ogica de Pereira (Columbia)}
+\institute[Mines St-\'Etienne]{Nicolas Durrande (durrande@emse.fr) \\ Jean-Charles Croix (jean-charles.croix@emse.fr) \\ Mines St-\'Etienne (France)}
+\author[Pereira, June 2015]{June 2016, Universidad Tecnol\'ogica de Pereira (Colombia)}
 \date{\null}
 
 \DeclareMathOperator*{\Var}{var}
@@ -35,11 +35,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\setbeamercolor{author in head/foot}{fg=gray,bg=white}
-\setbeamercolor{title in head/foot}{fg=gray,bg=white}
-\setbeamercolor{page number in head/foot}{fg=gray,bg=white}
-\setbeamercolor{section in head/foot}{bg=black,fg=gray}
-\setbeamercolor{subsection in head/foot}{bg=black,fg=gray}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -54,14 +49,59 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-The course will be over 4 days, with lectures every morning and lab sessions during the afternoon. \\ \vspace{5mm}
+Mines St-\'Etienne is a French institute of Science and technology.
+\vspace{5mm}
+\begin{columns}[c]
+\column{5cm}
+ \includegraphics[height=5cm]{figures/St_Etienne}
+\column{6cm}
+Main area of expertise:
+\begin{itemize}
+	\item materials science \& mechanical engineering
+	\item chemical engineering 
+	\item applied mathematics, industrial engineering, environmental science
+	\item biomedical and healthcare engineering
+	\item microelectronics
+\end{itemize}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{}
+\begin{center}
+\includegraphics[height=4cm]{figures/Mines}
+\end{center}
+\begin{columns}[t]
+\column{5cm}
+\textbf{Small}...
+\begin{itemize}
+	\item 600 students
+	\item 300 faculty staff
+	\item 180 PhD students 
+\end{itemize}
+\column{5cm}
+but \textbf{famous} : it is one of the leading French ``grandes écoles''.\\
+\end{columns}
+\vspace{5mm}
+Since 2015, there is a student exchange program with the UTP.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{}
+The course will be over 4 days, with lectures every morning and lab sessions during afternoons. \\ \vspace{5mm}
 The agenda is as follow:
 \vspace{0.2cm}
+\begin{description}
+	\item[day 1:] Statistical models in engineering
+	\item[day 2:] Design of experiments
+	\item[day 3:] Gaussian Process regression
+	\item[day 4:] Optimization  with Gaussian Process Regression
+\end{description}
+\vspace{5mm}
+The course material is available
 \begin{itemize}
-	\item \textbf{Day 1:} Statistical models in engineering
-	\item \textbf{Day 2:} Design of experiments
-	\item \textbf{Day 3:} Gaussian Process regression
-	\item \textbf{Day 4:} Optimization  with Gaussian Process Regression
+	\item[] github: user NicolasDurrande
+	\item[] webpage : \small{https://sites.google.com/site/nicolasdurrandehomepage}
 \end{itemize}
 \end{frame}
 
@@ -72,7 +112,7 @@ The lab session will be on the optimization of paper helicopters:\\
 \hspace{-5mm}\includegraphics[height=6cm]{figures/latexdraw/helico} \quad \includegraphics[height=5.8cm]{figures/helicopter2}
 \vspace{4mm}
 \begin{center}
-	\textbf{What value of $(a_l,\ w_l,\ t_l,\ w_w)$ give the longest falling time?}
+	\textbf{What values of $(a_l,\ w_l,\ t_l,\ w_w)$ give the longest falling time?}
 \end{center}
 \end{frame}
 
@@ -909,7 +949,7 @@ The values of $\tau^2$ are respectively 0.001, 0.01 and 0.1.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-We still have many thinks to discuss about such models:
+We still have many things to discuss about such models:
 \begin{itemize}
 	\item How to choose the observation points?
 	\item How to validate the model?
