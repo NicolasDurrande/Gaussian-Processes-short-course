@@ -30,7 +30,7 @@
 	\rule{\textwidth}{1pt}
 	\vspace{5mm}
 \end{center}
-This lab session is composed of two independent parts: the first one on linear regression and the second one on Gaussian process regression. Although they both are equally important for course, it is not possible to do tomorrow's lab if you have not answered Question 6 of Section 1. Make sure you do!
+This lab session is composed of two independent parts: the first one on linear regression and the second one on Gaussian process regression. Although they both are equally important for the course, it is not possible to do tomorrow's lab if you have not answered Question 6 of Section 1. Make sure you do!
 
 \paragraph{}
 \noindent One easy way to get a Python distribution with the required packages is to use the Anaconda environment from Continuum Analytics.
@@ -52,7 +52,7 @@ The aim of this section is to use data gathered from previous experiments on pap
 % \subsection*{Questions}
 \paragraph{Q1.} Do some basic data analysis and plotting on $X$ and $F$. Give an estimate of the observation noise.
 
-\paragraph{Q2.} Complete the function \texttt{LR} from the file \emph{lab1\_LR.py} such that this functions returns the estimate $\hat{\beta}$ and its covariance matrix.
+\paragraph{Q2.} Complete the function \texttt{LR} from the file \emph{lab1\_LR.py} such that this function returns the estimate $\hat{\beta}$ and its covariance matrix.
 
 \paragraph{Q3.} Complete the function \texttt{predLR} and build a first regression model based on a constant, a linear effect (say $w_l$) and a quadratic effect for the same variable. Plot the model using the function \texttt{plotModel} and compute the $R^2$. Do some variables seem more influential than others?
 
@@ -64,7 +64,7 @@ The aim of this section is to use data gathered from previous experiments on pap
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gaussian process regression}
-The code sample \emph{lab1\_GPR.py} should help you for this section. It contains some of the most classical covariance functions (ie kernels). Feel free to add new ones!
+The code sample \emph{lab1\_GPR.py} will help you for this section. It contains some of the most classical covariance functions (ie kernels). Feel free to add new ones!
 
 \paragraph{Q1.} Can you recognize the kernels that are already coded? Give the functions a proper name. Plot various of them and study the influence of the parameters. Why do some of them do not have a lengthcale parameter?
 
@@ -74,6 +74,6 @@ The code sample \emph{lab1\_GPR.py} should help you for this section. It contain
 
 \paragraph{Q4.} Finish writing the function \texttt{predGPR}. It should return the vector of conditional mean $m(x)$ and the conditional covariance matrix $c(x,x)$.
 
-\paragraph{Q5.} Build a model based on a few observations of the toy function \texttt{ftest} (input space is $(0,1)$). Plot the model using \texttt{plotModel} and study the influence of the kernel, its parameters and the DoE $X$. Which kernel, parameter values, DoE seem to give the best model?
+\paragraph{Q5.} Build a model based on a 5 observations of the toy function \texttt{ftest} (input space is $(0,1)$). Plot the model using \texttt{plotModel} and study the influence of the kernel, its parameters and the DoE $X$. Which kernel, parameter values, DoE seem to give the best model? To answer this question, compare the model predictions with actual values of the function on a test set. 
 
 \end{document}

@@ -44,16 +44,24 @@ pb.plot(x,y,linewidth=2)
 ## Question 2-3
 def sampleGP(x,mu,kern,n,**kwargs):
 	# return n sample paths from a centred GP N(mu,kern) evaluated at x
-	...
-	return(...)
+	K = kern(x,x,**kwargs)
+	Kv, KV = np.linalg.eig(K)
+	N = np.random.normal(0,1,(x.shape[0],n))
+	Z = np.dot(np.dot(KV,np.diag(np.sqrt(Kv))),N)
+	return(mu+Z)
 
 
 #########################
 ## Question 4
 def GPR(x,X,F,kern,**kwargs):
 	# return the mean predictor (m(x)=E[Z(x)|Z(X)=F]) and the conditional covariance matrix cov[Z(x),Z(x)|Z(X)=F]
-	...
-	return(...)
+	# We assume here that Z is centred
+	Kxx = kern(x,x,**kwargs)
+	KxX = kern(x,X,**kwargs)
+	KXX_1 = np.linalg.inv(kern(X,X,**kwargs))
+	mean = np.dot(np.dot(KxX,KXX_1),F)
+	var = Kxx - np.dot(np.dot(KxX,KXX_1),KxX.T)
+	return(mean,var)
 
 #########################
 ## Question 5
@@ -62,9 +70,22 @@ def ftest(x):
 
 def plotModel(x,m,v,**kwargs):
     x = x.flatten()
+    m = m.flatten()
+    if v.shape[0]==v.shape[1]:
+    	v = np.diag(v)
     upper=m+2*np.sqrt(v)
     lower=m-2*np.sqrt(v)
     pb.plot(x,m,color="#204a87",linewidth=2,**kwargs)
     pb.fill(np.hstack((x,x[::-1])),np.hstack((upper,lower[::-1])),color="#729fcf",alpha=0.3)
     pb.plot(x,upper,color="#204a87",linewidth=0.2)
     pb.plot(x,lower,color="#204a87",linewidth=0.2)
+
+x = np.linspace(0,1,200)[:,None]
+X = np.linspace(.1,.9,5)[:,None]
+F = ftest(X)
+
+condMean, condVar = GPR(x,X,F,kern,sigma2=1,theta=.2)
+
+plotModel(x,condMean,condVar)
+pb.plot(x,ftest(x))
+
