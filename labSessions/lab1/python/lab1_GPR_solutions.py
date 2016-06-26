@@ -6,32 +6,34 @@ pb.ion()
 ## Question 1
 
 # the input points X and Y are always arrays with d columns
-def kern(X,Y,sigma2=1.,theta=.2):
+def kernGauss(X,Y,sigma2=1.,theta=.2):
 	d2 = np.sum((X[:,None,:]-Y[None,:,:])**2/theta**2,2)
 	k = sigma2*np.exp(-d2/2.)
 	return(k)
 
-def kern(X,Y,sigma2=1.,theta=.2):
+def kernMat32(X,Y,sigma2=1.,theta=.2):
 	d = np.sqrt(np.sum((X[:,None,:]-Y[None,:,:])**2/theta**2,2))
 	k = sigma2*(1+np.sqrt(3)*d)*np.exp(-np.sqrt(3)*d)
 	return(k)
 
-def kern(X,Y,sigma2=1.,theta=.2):
+def kernMat52(X,Y,sigma2=1.,theta=.2):
 	d = np.sqrt(np.sum((X[:,None,:]-Y[None,:,:])**2/theta**2,2))
-	k = sigma2*(1+np.sqrt(3)*d)*np.exp(-np.sqrt(3)*d)
+	k = sigma2*(1+np.sqrt(5)*d+5./3.*d**2)*np.exp(-np.sqrt(5)*d)
 	return(k)
 
-def kern(X,Y,sigma2=1.):
+def kernCst(X,Y,sigma2=1.):
 	k = sigma2*np.ones((X.shape[0],Y.shape[0]))
 	return(k)
 
-def kern(X,Y,sigma2=1.):
+def kernBrown(X,Y,sigma2=1.):
 	k = sigma2*np.fmin(X,Y.T)
 	return(k)
 
-def kern(X,Y,sigma2=1.):
+def kernWhiteNoise(X,Y,sigma2=1.):
 	k = sigma2*np.all(X[:,None,:]==Y[None,:,:],axis=2)
 	return(k)
+
+kern = kernMat32
 
 ## plot kernel
 x = np.linspace(-1,1,200)[:,None]
