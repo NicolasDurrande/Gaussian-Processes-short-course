@@ -69,7 +69,7 @@ pb.plot(data[:,0]+data[:,2]+data[:,3],data[:,5],'kx',mew=1.5)
 pb.plot(data[:,4],data[:,5],'kx',mew=1.5)
 np.std(data[:,4]-data[:,5])
 
-varNoise = np.var(data[:,4]-data[:,5])
+varNoise = 2*np.var(data[:,4]-data[:,5])
 
 #########################
 ## Question 1
