@@ -521,7 +521,7 @@ This algorithm is much faster than the previous ones and gives a good approximat
 	\item[3] While $i<nb\_iter$ 
 	\item[4] \qquad generate one random point $z$ in the input space
 	\item[5] \qquad find the $X_i$ closest to $z$
-	\item[6] \qquad update $X_i = \frac{k_i x + z}{k_i+1}$
+	\item[6] \qquad update $X_i = \frac{k_i X_i + z}{k_i+1}$
 	\item[7] \qquad $k_i =k_i+1$
 \end{itemize}
 \end{frame}
@@ -612,7 +612,7 @@ We thus want to minimise this uncertainty.
 \end{block}
 \begin{block}{E-optimality}
 	The maximum eigenvalue of $(B(X)^t B(X))^{-1}$ is minimized
-	$$ \min_X \min_i \lambda_i \text{\qquad (where $\lambda_i$ is eigenvalue of $B(X)^t B(X))$}$$
+	$$ \min_X \max_i \lambda_i \text{\qquad (where $\lambda_i$ is eigenvalue of $B(X)^t B(X))$}$$
 \end{block}
 \end{frame}
 
@@ -739,7 +739,7 @@ Small recap on optimal design for GPR
 \vspace{3mm}
 Good practice:
 \begin{itemize}
-	\item Using regular grids or space filling designs
+	\item Use of space filling designs
 	\item Optimization inside a class of DoE
 \end{itemize}
 \vspace{3mm}
@@ -929,11 +929,6 @@ In general, optimizing DoE is difficult:
 		\item Adaptive designs
 		\item E-optimality
 	\end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{}
-\qquad \Large \structure{\textbf{Any question?}}
 \end{frame}
 
 %Ideas : radar, DoE for additive kriging
