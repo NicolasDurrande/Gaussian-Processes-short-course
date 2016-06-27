@@ -8,6 +8,7 @@ pb.ion()
 # first 4 columns are input: Wing-length, Wing-width, Tail-length, Arm-length
 # last 2 columns are outputs in seconds (flight time for two trials)
 data = np.genfromtxt('data.csv',delimiter=',')
+names = ["Wing-length", "Wing-width", "Tail-length", "Arm-length"]
 
 X = data[:,0:4]
 XS = (X-np.mean(X,axis=0))/np.std(X,axis=0)
@@ -16,7 +17,8 @@ F = np.mean(data[:,4:6],axis=1)[:,None]
 
 ## visualisation
 def angle(X):
-    return(np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+	# returns the angle (in degrees) between the tail and the wing
+    return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
 
 alpha = angle(X)
 for i in range(30):    
@@ -25,6 +27,7 @@ for i in range(30):
     X2[2,0] = X[i,2]-2.5
     pb.plot(X2[:,1],-X2[:,0],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
     pb.plot(-X2[:,1],-X2[:,0],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
+    pb.plot([0,0],[0,-X[i,2]],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
     
 pb.axis([-7,7,-10,3])
 
@@ -32,22 +35,31 @@ pb.axis([-7,7,-10,3])
 
 #########################
 ## basic data plot
+pb.figure(figsize=(10,10))
 
+pb.subplot(221)
 pb.plot(data[:,0],data[:,4],'kx',mew=1.5)
 pb.plot(data[:,0],data[:,5],'kx',mew=1.5)
+pb.ylabel('falling time'), pb.xlabel(names[0])
 
+pb.subplot(222)
 pb.plot(data[:,1],data[:,4],'kx',mew=1.5)
 pb.plot(data[:,1],data[:,5],'kx',mew=1.5)
+pb.ylabel('falling time'), pb.xlabel(names[1])
 
+pb.subplot(223)
 pb.plot(data[:,2],data[:,4],'kx',mew=1.5)
 pb.plot(data[:,2],data[:,5],'kx',mew=1.5)
+pb.ylabel('falling time'), pb.xlabel(names[2])
 
+pb.subplot(224)
 pb.plot(data[:,3],data[:,4],'kx',mew=1.5)
 pb.plot(data[:,3],data[:,5],'kx',mew=1.5)
+pb.ylabel('falling time'), pb.xlabel(names[3])
 
-aa = np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0]))/np.pi*180
-pb.plot(aa,data[:,4],'kx',mew=1.5)
-pb.plot(aa,data[:,5],'kx',mew=1.5)
+wing_angle = angle(X)/np.pi * 180
+pb.plot(wing_angle,data[:,4],'kx',mew=1.5)
+pb.plot(wing_angle,data[:,5],'kx',mew=1.5)
 
 pb.plot(data[:,0]+data[:,2]+data[:,3],data[:,4],'kx',mew=1.5)
 pb.plot(data[:,0]+data[:,2]+data[:,3],data[:,5],'kx',mew=1.5)
@@ -68,10 +80,11 @@ def B(x):
 	#output:  a matrix (b_j(x_i))_{i,j}
 	b0 = np.ones((x.shape[0],1))
 	#b1 = angle(x)[:,None]
-	b1 = (x[:,0]*x[:,1])[:,None]
+	b1 = x[:,1:4]
+	b2 = x[:,0:1]*x[:,3:4]
 	#b2 = b1**2
 	#b4 = (x[:,1])[:,None]
-	B = np.hstack((b0,b1))
+	B = np.hstack((b0,b1,b2))
 	return(B)
 
 def LR(X,F,B,tau2):
@@ -118,7 +131,7 @@ def R2(X,F,B,beta):
 
 def pvalue(beta,covBeta,X):
 	df = X.shape[0] - len(beta)
-	cdf = stats.t.cdf(np.abs(beta)/np.sqrt(np.diag(covBeta)),df)
+	cdf = stats.t.cdf(np.abs(beta[:,0])/np.sqrt(np.diag(covBeta)),df)
 	return(2*(1 - cdf))
 
 ## predict
@@ -127,7 +140,7 @@ x = np.hstack((g,g,g,g))
 beta,covBeta = LR(XS,F,B,varNoise)
 m,v = predLR(x,B,beta,covBeta)
 plotModel(g,m,v)
-pb.plot(XS[:,1],F,'kx',mew=1.5)
+pb.plot(XS[:,0],F,'kx',mew=1.5)
 R2(XS,F,B,beta)
 pvalue(beta,covBeta,X)
 
