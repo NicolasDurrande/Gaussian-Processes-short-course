@@ -17,7 +17,8 @@ F = np.mean(data[:,4:6],axis=1)[:,None]
 
 ## visualisation
 def angle(X):
-    return(np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+	# returns the angle (in degrees) between the tail and the wing
+    return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
 
 alpha = angle(X)
 for i in range(30):    

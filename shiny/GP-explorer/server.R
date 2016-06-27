@@ -3,6 +3,24 @@ library(shiny)
 # Define server logic required to plot various variables against mpg
 shinyServer(function(input, output) {
   
+  XY <- reactiveValues(
+    X = c(.1,.3,.5,.7,.9),
+    Y = sin(4*pi*c(.1,.3,.5,.7,.9)) + 2*c(.1,.3,.5,.7,.9)
+  )
+  
+  observeEvent(input$plotSample_click, {
+    if(input$addPts){
+    XY$X <- c(XY$X,input$plotSample_click$x)
+    XY$Y <- c(XY$Y,input$plotSample_click$y)
+    }else{
+      nearPt <- nearPoints(XY$X,XY$Y,input$plotSample_click$x,input$plotSample_click$y)
+      if(length(nearPt)){
+        XY$X <- XY$X[-nearPt]
+        XY$Y <- XY$Y[-nearPt]
+      }
+    }
+  })
+  
   output$mean <- renderPlot({
     source('functions.R')
     d <- c(0,1)        # domaine
@@ -78,8 +96,8 @@ shinyServer(function(input, output) {
     n_sample <- input$n_sample
     x <- matrix(seq(d[1],d[2],length.out=n_grid)) # prediction grid
     
-    X <- matrix(c(.1,.3,.5,.7,.9))
-    Y <- sin(4*pi*X) + 2*X
+    X <- matrix(XY$X)
+    Y <- matrix(XY$Y)
     
     b0 <- b1 <- b2 <- 0
     if(input$mean>0) b0 <- input$b0
@@ -87,6 +105,7 @@ shinyServer(function(input, output) {
     if(input$mean>2) b2 <- input$b2
     
     mean <- b0 + b1*x + b2*x^2
+    Ymean <- b0 + b1*X + b2*X^2
     
     kernel <- get_kernel(input$kernel)
     param <- c(input$sig2,input$theta)
@@ -95,16 +114,15 @@ shinyServer(function(input, output) {
     KxX <- kernel(x,X,param)
     KXX_1 <- solve(kernel(X,X,param))
     
-    cond_mean <- KxX %*% KXX_1 %*% Y
+    cond_mean <- mean+KxX %*% KXX_1 %*% (Y-Ymean)
     cond_var <- Kxx - KxX %*% KXX_1 %*% t(KxX)
     
     Z <- t(mvrnorm(n_sample,c(cond_mean),cond_var))
     
-    par_dflt <- par(no.readonly=TRUE)
     par(mar=c(4.5,5.1,1.5,1.5),cex.axis=1.2,cex.lab=1.5)
+    plot(x[,1],Z[,1],type='l',lty=1,xlab="x",ylab="Z(x)|Z(X)=Y",main="",col=brewer.pal(8,"RdBu"))
     matplot(x,Z,type='l',lty=1,xlab="x",ylab="Z(x)|Z(X)=Y",main="",col=brewer.pal(8,"RdBu"))
     points(X,Y,pch=4, cex=1,lwd=3)
-    par(par_dflt)
   })
   
   output$text1 <- renderText({ 
@@ -125,5 +143,9 @@ shinyServer(function(input, output) {
     if(input$kernel=="kGauss") return(withMathJax("$$k(x,y)=\\sigma^2 \\exp \\left(-\\frac{\\left(x-y\\right)^2}{2 \\, \\theta^2} \\right)$$"))
     if(input$kernel=="kBrown") return(withMathJax("$$k(x,y)=\\sigma^2 \\min(x,y))$$"))
   })
+
+#   output$info <- renderText({
+#     paste0("x=", XY$X, "\ny=", XY$Y)
+#   })
   
 })

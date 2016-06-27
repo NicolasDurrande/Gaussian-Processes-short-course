@@ -51,27 +51,35 @@ shinyUI(fluidPage(
   ),
   
   hr(),
-  
-  tabsetPanel(id="plots",
-    tabPanel("moments", 
-             fluidRow(
-               column(6,plotOutput("mean")),
-               column(6,plotOutput("kernel"))
-             )),
-    tabPanel("prior samples",
-             column(8,offset=2,plotOutput("priorSamples"))
-    ),
-    tabPanel("posterior samples",
-             column(8,offset=2,plotOutput("posteriorSamples"))
+  fluidRow(
+    tabsetPanel(id="plots",
+      tabPanel("moments", 
+               fluidRow(
+                 column(6,plotOutput("mean")),
+                 column(6,plotOutput("kernel"))
+               )),
+      tabPanel("prior samples",
+               column(8,offset=2,plotOutput("priorSamples"))
+      ),
+      tabPanel("posterior samples",
+               column(8,offset=2,plotOutput("posteriorSamples", click="plotSample_click")),
+               column(2,br(),br(),br(),radioButtons("addPts", label = "",selected = TRUE,
+                                     choices = list("add points" = TRUE, "remove points" = FALSE)
+                                     )
+               )
+      )
     )
   ),
+  
 
   hr(),
   
-  column(4,p("plotting parameters")),
-  column(4,numericInput("n_grid", "nb grid points", min = 10, max = 500, value = 101, step = 1)),
-  column(4,conditionalPanel(condition = "input.plots != 'moments'",numericInput("n_sample", "nb samples", min = 1, max = 1000, value = 100, step = 1))),
-  
+  fluidRow(
+    column(4,p("plotting parameters")),
+    column(4,numericInput("n_grid", "nb grid points", min = 10, max = 500, value = 101, step = 1)),
+    column(4,conditionalPanel(condition = "input.plots != 'moments'",numericInput("n_sample", "nb samples", min = 1, max = 1000, value = 100, step = 1)))
+  ),
   br(),br(),br()
+  # verbatimTextOutput("info")
 
 ))

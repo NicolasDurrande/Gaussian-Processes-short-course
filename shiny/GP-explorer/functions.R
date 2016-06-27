@@ -11,6 +11,17 @@ get_kernel <- function(name_str){
   return(kernel)
 }
 
+nearPoints <- function(X,Y,x,y){
+  n <- length(X)
+  dist2 <- (X-rep(x,n))^2 + (Y-rep(y,n))^2
+  m <- min(dist2)
+  if(m < 0.004){
+    return(which(dist2 == m))
+  }else{
+    return(c())
+  }
+}
+
 dist <- function(x,y,theta){
   dist2 <- matrix(0,dim(x)[1],dim(y)[1])
   for(i in 1:dim(x)[2]){
