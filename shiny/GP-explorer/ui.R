@@ -1,7 +1,6 @@
 library(shiny)
 library(MASS)
 
-# Define UI for miles per gallon application
 shinyUI(fluidPage(  
   fluidRow(headerPanel("GP explorer")),
   

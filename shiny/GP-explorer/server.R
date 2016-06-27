@@ -83,10 +83,10 @@ shinyServer(function(input, output) {
     
     Z <- t(mvrnorm(n_sample,c(mean),K))
 
-    par_dflt <- par(no.readonly=TRUE)
+    #par_dflt <- par(no.readonly=TRUE)
     par(mar=c(4.5,5.1,1.5,1.5),cex.axis=1.2,cex.lab=1.5)
-    matplot(x,Z,type='l',lty=1,xlab="x",ylab="Z(x)",main="",col=brewer.pal(8,"RdBu"))
-    par(par_dflt)
+    matplot(x,Z,type='l',lty=1,xlab="x",ylab="Z(x)",main="",col=mycols)
+    #par(par_dflt)
   })
   
   output$posteriorSamples <- renderPlot({
@@ -120,8 +120,8 @@ shinyServer(function(input, output) {
     Z <- t(mvrnorm(n_sample,c(cond_mean),cond_var))
     
     par(mar=c(4.5,5.1,1.5,1.5),cex.axis=1.2,cex.lab=1.5)
-    plot(x[,1],Z[,1],type='l',lty=1,xlab="x",ylab="Z(x)|Z(X)=Y",main="",col=brewer.pal(8,"RdBu"))
-    matplot(x,Z,type='l',lty=1,xlab="x",ylab="Z(x)|Z(X)=Y",main="",col=brewer.pal(8,"RdBu"))
+    plot(x[,1],Z[,1],type='l',lty=1,xlab="x",ylab="Z(x)|Z(X)=Y",main="",col=mycols)
+    matplot(x,Z,type='l',lty=1,xlab="x",ylab="Z(x)|Z(X)=Y",main="",col=mycols)
     points(X,Y,pch=4, cex=1,lwd=3)
   })
   
@@ -141,7 +141,7 @@ shinyServer(function(input, output) {
     if(input$kernel=="kMat32") return(withMathJax("$$k(x,y)=\\sigma^2 \\left(1 + \\sqrt{3} \\frac{\\left|x-y\\right|}{\\theta} \\right) \\exp \\left(- \\frac{\\left|x-y\\right|}{\\theta} \\right)$$"))
     if(input$kernel=="kMat52") return(withMathJax("$$k(x,y)=\\sigma^2 \\left(1 + \\sqrt{5} \\frac{\\left|x-y\\right|}{\\theta} + \\frac{5}{3} \\frac{\\left|x-y\\right|^2}{\\theta^2} \\right) \\exp \\left(- \\sqrt{5} \\frac{\\left|x-y\\right|}{\\theta} \\right)$$"))
     if(input$kernel=="kGauss") return(withMathJax("$$k(x,y)=\\sigma^2 \\exp \\left(-\\frac{\\left(x-y\\right)^2}{2 \\, \\theta^2} \\right)$$"))
-    if(input$kernel=="kBrown") return(withMathJax("$$k(x,y)=\\sigma^2 \\min(x,y))$$"))
+    if(input$kernel=="kBrown") return(withMathJax("$$k(x,y)=\\sigma^2 \\min(x,y)$$"))
   })
 
 #   output$info <- renderText({

@@ -9,8 +9,8 @@
 \input{../style.tex} 
 
 \title[Short course on Statistical Modeling for Optimization -- lecture 2/4]{ \small Short course on Statistical Modelling for Optimization -- lecture 2/4 \\ \vspace{3mm} \LARGE Design of Experiments}
-\institute[Mines St-\'Etienne]{Nicolas Durrande (durrande@emse.fr) -- Mines St-\'Etienne (France)}
-\author[Pereira, February 2015]{February 2015, Universidad Tecnol\'ogica de Pereira (Columbia)}
+\institute[Mines St-\'Etienne]{Nicolas Durrande (durrande@emse.fr) \\ Jean-Charles Croix (jean-charles.croix@emse.fr) \\ Mines St-\'Etienne -- France}
+\author[Pereira, June 2016]{June 2016 -- Universidad Tecnol\'ogica de Pereira -- Colombia}
 \date{\null}
 
 \DeclareMathOperator*{\Var}{var}
@@ -35,11 +35,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\setbeamercolor{author in head/foot}{fg=gray,bg=white}
-\setbeamercolor{title in head/foot}{fg=gray,bg=white}
-\setbeamercolor{page number in head/foot}{fg=gray,bg=white}
-\setbeamercolor{section in head/foot}{bg=black,fg=gray}
-\setbeamercolor{subsection in head/foot}{bg=black,fg=gray}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -58,7 +53,7 @@ We have seen yesterday how to build a model from a given set of input/output tup
 \begin{center}
 \includegraphics[height=5cm]{figures/R/model_0}
 \end{center}
-Today's question is: If the input points can be chosen, how can we obtain the best model?
+Today's question is: How to choose the input points to get the best model?
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -326,7 +321,7 @@ We will discuss three types of space filling designs:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Latin hypercubes}
-\textbf{Latin hypercubes} are designs where the domain is sliced in $n^d$ blocks and where there is only one point per `column':
+\textbf{Latin hypercubes} are designs where the domain is sliced in $n^d$ blocks and where there is only one point per ``line'' and ``column'':
 \begin{center}
 \includegraphics[height=5cm]{figures/latexdraw/lhs1}
 \end{center}

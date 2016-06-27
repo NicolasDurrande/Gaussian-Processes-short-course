@@ -1,5 +1,4 @@
-library(RColorBrewer)
-
+mycols <- c("#B2182B", "#D6604D", "#F4A582", "#FDDBC7", "#D1E5F0", "#92C5DE", "#4393C3", "#2166AC")
 darkblue <- "#204A87FF"
 
 get_kernel <- function(name_str){
@@ -32,7 +31,7 @@ dist <- function(x,y,theta){
 
 kBrown <- function(x,y,param=NULL){
   if(is.null(param)) param <-1
-  param*outer(c(x),c(y),"pmin")
+  param[1]*outer(c(x),c(y),"pmin")
 }
 
 kExp <- function(x,y,param=NULL){
