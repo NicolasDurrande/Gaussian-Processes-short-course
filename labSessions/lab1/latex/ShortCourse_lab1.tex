@@ -64,13 +64,13 @@ The aim of this section is to use data gathered from previous experiments on pap
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gaussian process regression}
-The code sample \emph{lab1\_GPR.py} will help you for this section. It contains some of the most classical covariance functions (ie kernels). Feel free to add new ones!
+The code sample \emph{lab1\_GPR.py} will help you for this section. It contains some of the most classical covariance functions (ie kernels). Feel free to add new ones! The demo that was shown this morning is based on the ``shiny'' R package. It can be accessed online here: https://ndurrande.shinyapps.io/GP-explorer.
 
-\paragraph{Q1.} Can you recognize the kernels that are already coded? Give the functions a proper name. Plot various of them and study the influence of the parameters. Why do some of them do not have a lengthcale parameter?
+\paragraph{Q1.} Can you recognize the kernels that are already coded? Give the functions a proper name. Plot various of them and study the influence of the parameters. Why do some of them do not have a length-scale parameter? 
 
 \paragraph{Q2.} Complete the function \texttt{sampleGP(x,kern,n,**kwargs)}. This function should return $n$ samples evaluated at $x$ of a centred GP with kernel $kern$. The kernel parameters $\sigma^2$ and $\theta$ may be specified by the user in the input \texttt{**kwargs}.
 
-\paragraph{Q3.} Plot sample paths for various kernels and parameters. What is the influence of the variance and lengthscale parameters?
+\paragraph{Q3.} Plot sample paths for various kernels and parameters. What is the influence of the variance and length-scale parameters?
 
 \paragraph{Q4.} Finish writing the function \texttt{predGPR}. It should return the vector of conditional mean $m(x)$ and the conditional covariance matrix $c(x,x)$.
 
