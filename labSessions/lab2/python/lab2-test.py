@@ -12,11 +12,11 @@ pb.ion()
 # Designs of Experiments
 
 # generate random uniform numbers
-X = np.random.uniform(0,1,(40,2))
+X = np.random.uniform(0,1,(40,4))
 pb.plot(X[:,0],X[:,1],'kx',mew=1.5)
 
 # generate Sobol Low discrepency sequence
-XS = SobolSequence(40,2)
+XS = SobolSequence(40,4)
 pb.plot(XS[:,0],XS[:,1],'bx',mew=1.5)
 
 #############################
@@ -137,3 +137,5 @@ def writeLaTeX(X,groupName):
 
 	f.write('\end{document}')
 	f.close()
+
+
