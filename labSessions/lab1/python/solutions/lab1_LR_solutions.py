@@ -18,7 +18,7 @@ F = np.mean(data[:,4:6],axis=1)[:,None]
 ## visualisation
 def angle(X):
 	# returns the angle (in degrees) between the tail and the wing
-    return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+    return(np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
 
 alpha = angle(X)
 for i in range(30):    
@@ -57,19 +57,24 @@ pb.plot(data[:,3],data[:,4],'kx',mew=1.5)
 pb.plot(data[:,3],data[:,5],'kx',mew=1.5)
 pb.ylabel('falling time'), pb.xlabel(names[3])
 
+pb.figure()
 wing_angle = angle(X)/np.pi * 180
 pb.plot(wing_angle,data[:,4],'kx',mew=1.5)
 pb.plot(wing_angle,data[:,5],'kx',mew=1.5)
+pb.ylabel('falling time'), pb.xlabel('wing angle')
 
+
+pb.figure()
 pb.plot(data[:,0]+data[:,2]+data[:,3],data[:,4],'kx',mew=1.5)
 pb.plot(data[:,0]+data[:,2]+data[:,3],data[:,5],'kx',mew=1.5)
+pb.ylabel('falling time'), pb.xlabel('total length')
 
 
 ## correlation between throws
 pb.plot(data[:,4],data[:,5],'kx',mew=1.5)
 np.std(data[:,4]-data[:,5])
 
-varNoise = np.var(data[:,4]-data[:,5])
+varNoise = .5*np.var(data[:,4]-data[:,5])
 
 #########################
 ## Question 1
