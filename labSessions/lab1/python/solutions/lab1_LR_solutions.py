@@ -24,7 +24,9 @@ alpha = angle(X)
 newX = X[:,0:3]
 newX = np.hstack((newX,alpha[:,None]))
 
-def length(X):
+def armLength(X):
+	# X is Wing-length, Wing-width, Tail-length, angle
+	# returns the arm length
 	return(np.sqrt(X[:,0]**2+(X[:,2]-2.5)**2-2*np.cos(X[:,3]*180/np.pi)*X[:,0]*(X[:,2]-2.5))+2.5)
 
 al = length(newX) #Back to reality...

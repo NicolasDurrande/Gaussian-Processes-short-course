@@ -14,12 +14,6 @@ names = ["Wing-length", "Wing-width", "Tail-length", "Arm-length"]
 
 F = np.mean(data[:,4:6],axis=1)[:,None]
 
-## visualisation
-def angle(X):
-	# returns the angle (in degrees) between the tail and the wing
-    return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
-
-
 #########################
 ## Question 2
 
@@ -86,7 +80,19 @@ def pvalue(beta,covBeta,X):
 	return(2*(1 - cdf))
 
 #########################
-## Question 4
+## Question 5
+
+## coordinate change
+def angle(X):
+	# X is Wing-length, Wing-width, Tail-length, Arm-length
+	# returns the angle (in degrees) between the tail and the wing
+    return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+
+def armLength(X):
+	# X is Wing-length, Wing-width, Tail-length, angle (in degrees) between the tail and the wing
+	# returns the arm length
+	return(np.sqrt(X[:,0]**2+(X[:,2]-2.5)**2-2*np.cos(X[:,3]*180/np.pi)*X[:,0]*(X[:,2]-2.5))+2.5)
+
 
 #########################
 ## Question 6
