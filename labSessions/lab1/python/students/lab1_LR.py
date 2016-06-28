@@ -4,7 +4,7 @@ import scipy.stats as stats
 pb.ion()
 
 #########################
-## Question 1
+## load the data
 # first 4 columns are input: Wing-length, Wing-width, Tail-length, Arm-length
 # last 2 columns are outputs in seconds (flight time for two trials)
 data = np.genfromtxt('lab1_data.csv',delimiter=',')
@@ -13,6 +13,10 @@ X = data[:,0:4]
 names = ["Wing-length", "Wing-width", "Tail-length", "Arm-length"]
 
 F = np.mean(data[:,4:6],axis=1)[:,None]
+
+#########################
+## Question 1
+
 
 #########################
 ## Question 2
@@ -76,7 +80,7 @@ def R2(X,F,B,beta):
 
 def pvalue(beta,covBeta,X):
 	df = X.shape[0] - len(beta)
-	cdf = stats.t.cdf(np.abs(beta)/np.sqrt(np.diag(covBeta)),df)
+	cdf = stats.t.cdf(np.abs(beta[:,0])/np.sqrt(np.diag(covBeta)),df)
 	return(2*(1 - cdf))
 
 #########################
@@ -86,7 +90,7 @@ def pvalue(beta,covBeta,X):
 def angle(X):
 	# X is Wing-length, Wing-width, Tail-length, Arm-length
 	# returns the angle (in degrees) between the tail and the wing
-    return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+	return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
 
 def armLength(X):
 	# X is Wing-length, Wing-width, Tail-length, angle (in degrees) between the tail and the wing
