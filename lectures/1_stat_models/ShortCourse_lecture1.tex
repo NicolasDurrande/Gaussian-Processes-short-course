@@ -100,8 +100,8 @@ The agenda is as follow:
 \vspace{5mm}
 The course material is available
 \begin{itemize}
-	\item[] webpage: \small{https://sites.google.com/site/nicolasdurrandehomepage}
-	\item[] github: user NicolasDurrande, repository Gaussian-Process-short-Course
+	\item[] webpage: {\small https://sites.google.com/site/nicolasdurrandehomepage}
+	\item[] github: {\small user NicolasDurrande, repo Gaussian-Process-short-Course}
 \end{itemize}
 
 \end{frame}
@@ -491,7 +491,7 @@ We will just stress a few \textbf{pros and cons of these models}:
   \item[] \vspace{-5mm}
   \item[$-$] are not flexible (need to choose the basis functions)
   \item[$-$] do not interpolate
-  \item[$-$] may explode when using high order polynomials (overfitting)
+  \item[$-$] may explode when using high order polynomials (over-fitting)
 \end{itemize}
 \end{frame}
 
@@ -600,7 +600,7 @@ The conditional distribution of $Y$ knowing $Z$ is still multivariate normal $Y|
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
 \begin{exampleblock}{Exercise}
-	Starting from the density function, prove the previous property using the Schur block inverse:
+	Starting from the density function, prove the previous property using the Schur bloc inverse:
 \begin{equation*}
 \begin{pmatrix}
 	\Sigma_{1,1} & \Sigma_{1,2}\\
@@ -684,7 +684,7 @@ Can we look at the sample paths associated to these kernels?\\
 \vspace{5mm}
 In order to simulate sample paths from a GP $Z \sim \mathcal{N}(m(.),k(.,.))$, we will consider samples of the GP discretised on a fine grid.
 \vspace{5mm}
-\begin{exampleblock}{Exercice: Simulating sample paths}
+\begin{exampleblock}{Exercise: Simulating sample paths}
 Let X be a set 100 regularly spaced points over the input space of $Z$.
 \begin{itemize}
 	\item What is the distribution of $Z(X)$ ?
@@ -698,16 +698,16 @@ $\Rightarrow$ Shiny App
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
 Furthermore, we can include some scaling parameters into the kernels:
-\begin{exampleblock}{Exercice:}
+\begin{exampleblock}{Exercise:}
 If $Z$ is a GP $\mathcal{N}(0,k(.,.))$, what is the distribution of $Y(x) = \sigma Z(x/\theta)$
 \end{exampleblock}
 \vspace{5mm}
-$\sigma^2$ is called the \textbf{variance} and $\theta$ the \textbf{lengthscale}
+$\sigma^2$ is called the \textbf{variance} and $\theta$ the \textbf{length-scale}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-\begin{exampleblock}{Exercice: }
+\begin{exampleblock}{Exercise: }
 The kernel is Matern 5/2. Can you put each line in the right order?
 \begin{center}
 \begin{tabular}{ccc}
@@ -722,7 +722,7 @@ $(\sigma^2,\theta) = (3,3)$& $(\sigma^2,\theta)=(1,0.5)$& $(\sigma^2,\theta)=(1,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-\begin{exampleblock}{Exercice: }
+\begin{exampleblock}{Exercise: }
 Answer is:
 \begin{center}
 \begin{tabular}{ccc}
@@ -737,7 +737,7 @@ $(\sigma^2,\theta) = (3,3)$& $(\sigma^2,\theta)=(1,0.5)$& $(\sigma^2,\theta)=(1,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-In higher dimension one can introduce one lengthscale parameter per dimension. The usual Euclidean distance between two points $|| x-y || = ( \sum (x_i-y_i)^2)^{1/2}$ is thus replaced by
+In higher dimension one can introduce one length-scale parameter per dimension. The usual Euclidean distance between two points $|| x-y || = ( \sum (x_i-y_i)^2)^{1/2}$ is thus replaced by
 \begin{equation*}
 	\Ni{x-y}{\theta} = \left( \sum_{i=1}^d \frac{(x_i-y_i)^2}{\theta_i^2} \right)^{1/2}.
 \end{equation*}
@@ -758,7 +758,6 @@ Here is a list of the most common kernels:\\
 		Matern 5/2 & $\displaystyle k(x,y) = \sigma^2 \left(1 + \sqrt{5}\Ni{x-y}{\theta} + \frac{5}{3}\Ni{x-y}{\theta}^2 \right) \exp \left(- \sqrt{5}\Ni{x-y}{\theta} \right)$ &\\[4mm]
 		Gaussian & $\displaystyle k(x,y) = \sigma^2 \exp \left(- \frac12 \Ni{x-y}{\theta}^2 \right)$ &\\[4mm]
 \end{tabular}
-Once again we can look at sample paths.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -786,7 +785,7 @@ What would be the next step?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
 We can look at the conditional distribution of $Z$ knowing that it interpolates the data points: 
-\begin{exampleblock}{Exercice}
+\begin{exampleblock}{Exercise}
 \begin{itemize}
 	\item[1.] What is the conditional distribution of $Z(x)|Z(X)=F$?
 	\item[2.] Compute the conditional mean $m$ and covariance $c(.,.)$.
@@ -835,7 +834,7 @@ It can summarized by a mean function and 95\% confidence intervals.
 \begin{frame}{}
 A few remarkable properties of GPR models 
 \begin{itemize}
-	\item They interpolate the data-points
+	\item They (can) interpolate the data-points
 	\item The prediction variance does not depend on the observations
 	\item The mean predictor does not depend on the variance
 	\item They (usually) come back to zero when we are far away from the observations.
@@ -846,20 +845,37 @@ Can you prove them?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-Changing the the kernel \alert{has a huge impact on the model}:\\ 
+Changing the kernel \alert{has a huge impact on the model}:\\ 
+\vspace{5mm}
 \begin{center}
-\includegraphics[height=4cm]{figures/R/Fig2-GP-rbf} 
-\includegraphics[height=4cm]{figures/R/Fig2-GP-exp}
+\includegraphics[height=3.9cm]{figures/Fig2-GP-rbf} \qquad 
+\includegraphics[height=3.9cm]{figures/Fig2-GP-exp}
 \end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
 This is because changing the kernel means changing the prior on $f$\\ 
+\vspace{5mm}
 \begin{center}
-\includegraphics[height=4cm]{figures/R/Fig2-sim-rbf} 
-\includegraphics[height=4cm]{figures/R/Fig2-sim-exp}
+\includegraphics[height=3.8cm]{figures/Fig2-sim-rbf} \qquad 
+\includegraphics[height=3.8cm]{figures/Fig2-sim-exp}
 \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{}
+There is no model/kernel that is intrinsically better... it depends on the data!
+\begin{center}
+\includegraphics[height=3.5cm]{figures/Fig2-GP-rbf} \hspace{1cm}
+\includegraphics[height=3.5cm]{figures/Fig2-GP-exp}
+\end{center}
+The kernel has to be chosen accordingly to our prior belief on the behaviour of the function to study:
+\begin{itemize}
+  \item is it continuous, differentiable, how many times?
+  \item is it stationary ?
+  \item ...
+\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

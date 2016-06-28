@@ -25,3 +25,4 @@
 *.fls
 *.snm
 *.Rhistory
+*.pyc
