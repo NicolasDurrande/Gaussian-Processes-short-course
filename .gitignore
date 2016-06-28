@@ -26,3 +26,4 @@
 *.snm
 *.Rhistory
 *.pyc
+shiny/GP-explorer/rsconnect
