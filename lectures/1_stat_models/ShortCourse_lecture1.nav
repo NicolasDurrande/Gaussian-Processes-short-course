@@ -163,18 +163,22 @@
 \headcommand {\beamer@framepages {72}{72}}
 \headcommand {\slideentry {5}{1}{31}{73/73}{}{0}}
 \headcommand {\beamer@framepages {73}{73}}
-\headcommand {\sectionentry {6}{Conclusion}{74}{Conclusion}{0}}
-\headcommand {\beamer@sectionpages {42}{73}}
-\headcommand {\beamer@subsectionpages {43}{73}}
-\headcommand {\slideentry {6}{0}{32}{74/74}{}{0}}
+\headcommand {\slideentry {5}{1}{32}{74/74}{}{0}}
 \headcommand {\beamer@framepages {74}{74}}
-\headcommand {\beamer@subsectionentry {0}{6}{1}{75}{}}\headcommand {\beamer@subsectionpages {74}{74}}
-\headcommand {\slideentry {6}{1}{1}{75/75}{}{0}}
+\headcommand {\slideentry {5}{1}{33}{75/75}{}{0}}
 \headcommand {\beamer@framepages {75}{75}}
-\headcommand {\slideentry {6}{1}{2}{76/76}{}{0}}
+\headcommand {\sectionentry {6}{Conclusion}{76}{Conclusion}{0}}
+\headcommand {\beamer@sectionpages {42}{75}}
+\headcommand {\beamer@subsectionpages {43}{75}}
+\headcommand {\slideentry {6}{0}{34}{76/76}{}{0}}
 \headcommand {\beamer@framepages {76}{76}}
-\headcommand {\beamer@partpages {1}{76}}
-\headcommand {\beamer@subsectionpages {75}{76}}
-\headcommand {\beamer@sectionpages {74}{76}}
-\headcommand {\beamer@documentpages {76}}
-\headcommand {\def \inserttotalframenumber {75}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{77}{}}\headcommand {\beamer@subsectionpages {76}{76}}
+\headcommand {\slideentry {6}{1}{1}{77/77}{}{0}}
+\headcommand {\beamer@framepages {77}{77}}
+\headcommand {\slideentry {6}{1}{2}{78/78}{}{0}}
+\headcommand {\beamer@framepages {78}{78}}
+\headcommand {\beamer@partpages {1}{78}}
+\headcommand {\beamer@subsectionpages {77}{78}}
+\headcommand {\beamer@sectionpages {76}{78}}
+\headcommand {\beamer@documentpages {78}}
+\headcommand {\def \inserttotalframenumber {77}}

@@ -599,6 +599,27 @@ The conditional distribution of $Y$ knowing $Z$ is still multivariate normal $Y|
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
+\begin{exampleblock}{Example 1}	
+2D multivariate Gaussian conditional distribution:\\ 
+\begin{center}
+\includegraphics[height=6cm]{figures/ch1_condpdf1}
+\end{center}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{}
+\begin{exampleblock}{Example 2}	
+3D multivariate Gaussian conditional distribution:\\ 
+\begin{center}
+\includegraphics[height=6cm]{figures/ch1_condpdf2} 
+\end{center}
+\end{exampleblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{}
 \begin{exampleblock}{Exercise}
 	Starting from the density function, prove the previous property using the Schur bloc inverse:
 \begin{equation*}
@@ -699,7 +720,7 @@ $\Rightarrow$ Shiny App
 \begin{frame}{}
 Furthermore, we can include some scaling parameters into the kernels:
 \begin{exampleblock}{Exercise:}
-If $Z$ is a GP $\mathcal{N}(0,k(.,.))$, what is the distribution of $Y(x) = \sigma Z(x/\theta)$
+If $Z$ is a GP $\mathcal{N}(0,k(.,.))$, what is the distribution of $Y(x) = \sigma Z(x/\theta)$ ?
 \end{exampleblock}
 \vspace{5mm}
 $\sigma^2$ is called the \textbf{variance} and $\theta$ the \textbf{length-scale}
