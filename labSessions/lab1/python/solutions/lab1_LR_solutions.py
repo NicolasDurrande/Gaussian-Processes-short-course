@@ -7,7 +7,7 @@ pb.ion()
 ## Load data
 # first 4 columns are input: Wing-length, Wing-width, Tail-length, Arm-length
 # last 2 columns are outputs in seconds (flight time for two trials)
-data = np.genfromtxt('data.csv',delimiter=',')
+data = np.genfromtxt('data.csv',delimiter=',') # (Wl, Ww, Tl, Al)
 names = ["Wing-length", "Wing-width", "Tail-length", "Arm-length"]
 
 X = data[:,0:4]
@@ -21,6 +21,14 @@ def angle(X):
     return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
 
 alpha = angle(X)
+newX = X[:,0:3]
+newX = np.hstack((newX,alpha[:,None]))
+
+def length(X):
+	return(np.sqrt(X[:,0]**2+(X[:,2]-2.5)**2-2*np.cos(X[:,3]*180/np.pi)*X[:,0]*(X[:,2]-2.5))+2.5)
+
+al = length(newX) #Back to reality...
+
 for i in range(30):    
     X2 = np.zeros((3,2))
     X2[1,:] = X[i,0]*np.asarray((np.cos(alpha[i]),np.sin(alpha[i])))

@@ -66,6 +66,30 @@ IMSE(XS)
 ##                            part 2                            ##
 ##################################################################
 
+## Change of parameterization
+# (Wl, Ww, Tl, Al)
+Test = np.random.uniform(0,1,(5,4))
+Test[:,0]=3.5+Test[:,0]*3
+Test[:,1]=2.5+Test[:,1]*2
+Test[:,2]=5.5+Test[:,2]*5
+Test[:,3]=8+Test[:,3]*4
+
+# From (Wl, Ww, Tl, Al) to (Wl, Ww, Tl, Theta)
+def angle(X):
+	# returns the angle (in degrees) between the tail and the wing
+    return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+
+alpha = angle(Test)
+
+# From (Wl, Ww, Tl, Theta) to (Wl, Ww, Tl, Al)
+def length(X):
+
+	return(X[:,0]**2+X[:,2]**2-2*np.cos(X[:,3]*120/np.pi)*X[:,0]*X[:,2])
+
+##################################################################
+##                            part 3                            ##
+##################################################################
+
 def single_helico_str(X,expNumber,groupName):
 	(Wl, Ww, Tl, Al) = X
 	Aw = .7
