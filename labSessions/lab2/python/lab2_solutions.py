@@ -80,7 +80,7 @@ X = SobolSequence(40,4)
 
 ## we choose the following parametrization with domain boundaries
 namesNew = ['wing angle', 'wing area','total length', 'wing_l / tail_l ratio']
-limits = np.array([75,115,20,35,22,32,0.65,1.6]).reshape(4,2).T
+limits = np.array([75,115,20,35,22,31,0.65,1.6]).reshape(4,2).T
 
 # mapping to the new space
 def old2new(X):
@@ -103,7 +103,7 @@ def new2old(Y):
 
 
 ## Change of coordinate 1: [0,1]^4 to the new domain
-X = X*(limits[1,:]-limits[0,:])[None,:] + limits[0+1,:]
+X = X*(limits[1,:]-limits[0,:])[None,:] + limits[0:1,:]
 
 ## Change of coordinate 2: new domain to the old one
 X = new2old(X)
@@ -177,3 +177,6 @@ def writeLaTeX(X,groupName):
 
 	f.write('\end{document}')
 	f.close()
+
+writeLaTeX(X,"heureuxCopter")
+

@@ -50,11 +50,11 @@ The aim of this section is to define a DoE of 40 points over $(0,1)^4$ that show
 
 \paragraph{Step 1.} Convert your DoE on $(0,1)^4$ to the hyper-rectangle you defined during the last lab session.
 
-\paragraph{Step 2.} If you have changed the parameterization of the problem, convert the set of points to the initial space $w_l,\ w_w,\ t_l,\ a_l$. You should obtain a np.array of shape $(40,4)$. The following constrains on the design should be respected: $w_l + t_l + a_l \leq 31.6cm$, $a_l > 2.5cm$, $t_l > 2.5cm$ and $w_w < 10.1$.
+\paragraph{Step 2.} If you have changed the parameterization of the problem, convert the set of points to the initial space $w_l,\ w_w,\ t_l,\ a_l$. You should obtain a np.array of shape $(40,4)$. The following physical constrains on the design should be respected: $w_l + t_l + a_l \leq 31cm$, $a_l > 2.5cm$, $t_l > 2.5cm$ and $w_w < 9.8cm$.
 
-\paragraph{Step 3.} Execute the function \texttt{writeLaTeX} for your design. It will generate a file `helicopter.tex'.
+\paragraph{Step 3.} Execute the function \texttt{writeLaTeX} for your design. It will generate .tex file with your group name.
 
-\paragraph{Step 4.} Run a latex compiler to transform the .tex file into a pdf. Note that the compiler must be able to deal with ps-pictures and LaTeX->PS->pdf is recommended.
+\paragraph{Step 4.} Run a latex compiler to transform the .tex file into a pdf. Note that the compiler must be able to deal with ps-pictures and LaTeX->DviPS->ps2pdf is recommended.
 
 \paragraph{Step 5.} Print the pdf document and start making the helicopters! Use two paper-clips to fix the `arms' on the `tail'. These paper-clips are important, they also give stability to the helicopter.
 
