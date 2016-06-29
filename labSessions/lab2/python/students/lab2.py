@@ -10,14 +10,22 @@ pb.ion()
 
 # generate random uniform numbers
 X = np.random.uniform(0,1,(40,2))
-pb.plot(X[:,0],X[:,1],'kx',mew=1.5)
-
-# generate Sobol Low discrepency sequence
+# generate Sobol Low discrepancy sequence
 XS = SobolSequence(40,2)
-pb.plot(XS[:,0],XS[:,1],'bx',mew=1.5)
 
+# plot them
+pb.figure(figsize=(8,4))
+pb.subplot(121)
+pb.plot(X[:,0],X[:,1],'kx',mew=1.5)
+pb.title('random uniform')
+pb.subplot(122)
+pb.plot(XS[:,0],XS[:,1],'bx',mew=1.5)
+pb.title('Sobol sequence')
+
+####################################
+# Various uniformity criteria
 def discrepancy(X):
-	# compute the discrepency with respect to the center of the domain
+	# compute the discrepancy with respect to the center of the domain
 	n,d = X.shape
 	Xcentred = X-.5
 	distCentreX = np.sort(np.max(np.abs(Xcentred),axis=1))
@@ -50,6 +58,7 @@ minimax(X)
 minimax(XS)
 
 def IMSE(X,theta=.2):
+	# squared exponential kernel is assumed
 	n,d = X.shape
 	G = SobolSequence(50000,d)
 	dX2 = np.sum((X[:,None,:]-X[None,:,:])**2/theta**2,2)
@@ -66,25 +75,38 @@ IMSE(XS)
 ##                            part 2                            ##
 ##################################################################
 
-## Change of parameterization
-# (Wl, Ww, Tl, Al)
-Test = np.random.uniform(0,1,(5,4))
-Test[:,0]=3.5+Test[:,0]*3
-Test[:,1]=2.5+Test[:,1]*2
-Test[:,2]=5.5+Test[:,2]*5
-Test[:,3]=8+Test[:,3]*4
+## We have a DoE X in [0,1]^4
+X = SobolSequence(40,4)
 
-# From (Wl, Ww, Tl, Al) to (Wl, Ww, Tl, Theta)
-def angle(X):
-	# returns the angle (in degrees) between the tail and the wing
-    return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+## we choose the following parametrization with domain boundaries
+namesNew = ['wing angle', 'wing area','total length', 'wing_l / tail_l ratio']
+limits = np.array([75,115,20,35,22,32,0.65,1.6]).reshape(4,2).T
 
-alpha = angle(Test)
+# mapping to the new space
+def old2new(X):
+	Y = 0*X
+	Y[:,0] = angle(X)
+	Y[:,1] = X[:,0] * X[:,1]  
+	Y[:,2] = X[:,0] + X[:,2] + X[:,3] 
+	Y[:,3] = X[:,0] / (X[:,2] - 2.5)
+	return(Y)
 
-# From (Wl, Ww, Tl, Theta) to (Wl, Ww, Tl, Al)
-def length(X):
+# mapping to the original space
+def new2old(Y):
+	X = 0*Y
+	f_1 = np.sqrt(1+(1/Y[:,3])**2-2*np.cos(Y[:,0]*np.pi/180)*(1/Y[:,3]))
+	X[:,0] = (Y[:,2]-5) / (1 + 1./Y[:,3] + f_1)
+	X[:,1] = Y[:,1] / X[:,0]
+	X[:,2] = X[:,0] / Y[:,3] + 2.5
+	X[:,3] = Y[:,2] - X[:,0] - X[:,2]
+	return(X)
 
-	return(X[:,0]**2+X[:,2]**2-2*np.cos(X[:,3]*120/np.pi)*X[:,0]*X[:,2])
+
+## Change of coordinate 1: [0,1]^4 to the new domain
+X = X*(limits[1,:]-limits[0,:])[None,:] + limits[0+1,:]
+
+## Change of coordinate 2: new domain to the old one
+X = new2old(X)
 
 ##################################################################
 ##                            part 3                            ##
@@ -132,10 +154,10 @@ def single_helico_str(X,expNumber,groupName):
 
 
 def writeLaTeX(X,groupName):
-	# inputs: 	X, Design of Experiments, a (n,4) np.array
+	# inputs: 	X, Design of Experiments, a (n,4) np.array corresponding to ["Wing-length", "Wing-width", "Tail-length", "Arm-length"]
 	# 			groupName, a string (escape LaTeX characters such as \ _ etc)
 	# output:	write a file 'helicopters.tex'
-	f = open('helicopters.tex', 'w')
+	f = open(groupName+'.tex', 'w')
 
 	f.write( """\documentclass{article}
 	\usepackage[usenames,dvipsnames]{pstricks}
@@ -144,7 +166,7 @@ def writeLaTeX(X,groupName):
 	\\raggedbottom 
 	""")
 	
-	wleft = 19.5
+	wleft = 19.6
 	for i in range(X.shape[0]):
 		if 2*X[i,1] < wleft:
 			f.write(single_helico_str(X[i,:],i+1,groupName))
