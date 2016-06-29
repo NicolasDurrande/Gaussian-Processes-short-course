@@ -15,9 +15,11 @@
 \usepackage{enumitem}
 \usepackage[top=2cm, bottom=3cm, left=3cm , right=3cm]{geometry}
 \usepackage{tikz}
-\usepackage[hidelinks]{hyperref}
+%\usepackage[hidelinks]{hyperref}
+\usepackage{ulem}
 
 \usetikzlibrary{automata,arrows,positioning,calc}
+
 
 \begin{document}
 \begin{center}
@@ -26,17 +28,17 @@
 	{\LARGE \textbf{Lab 3 -- Gaussian Process Regression}}\\ 
 	\vspace{3mm}
 	{\large Short course on Statistical modelling for optimization\\ \vspace{3mm}}
-	{\normalsize N. Durrande, Universidad Tecnol\'ogica de Pereira, 2015}\\ 
+	{\normalsize N. Durrande - J.C. Croix, Universidad Tecnol\'ogica de Pereira, 2016}\\ 
 	\vspace{3mm}
 	\rule{\textwidth}{1pt}
 	\vspace{5mm}
 \end{center}
-The aim of this lab session is to obtain the best possible GPR model for the data that has been collected yesterday.
+The aim of this lab session is to obtain the best possible GPR model for the data that has been collected \sout{yesterday} during lunch time.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Models with GPy}
 GPy is a python package for Gaussian process models. If you have not already installed it on your computer, we advise that you download the developers version of github:
-\url{https://github.com/SheffieldML/GPy/tree/devel} (there is a link 'Download ZIP' on the right). The installation steps are: 1. unzip the file; 2. Open a terminal (for example the Anaconda terminal) and go to the unzipped folder; 3. Run the command \texttt{python setup.py install}. You should then be able to import the GPy library.
+\url{https://github.com/SheffieldML/GPy/tree/devel} (there is a link ``Download ZIP'' on the right). The installation steps are: 1. unzip the file; 2. Open a terminal (for example the Anaconda terminal) and go to the unzipped folder; 3. Run the command \texttt{python setup.py install}. You should then be able to import the GPy library.
 
 % \subsection*{Questions}
 \paragraph{Q1.} Import the data you have generated yesterday. If your data is in a csv file where the first 4 columns are the inputs and the last ones the outputs, you should just have to change the csv file name in the script.

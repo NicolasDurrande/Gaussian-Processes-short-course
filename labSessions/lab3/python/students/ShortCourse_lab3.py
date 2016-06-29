@@ -18,8 +18,10 @@ def Q2(F,mX):
 
 # load data
 data = np.genfromtxt('lab1_data.csv',delimiter=',')
-X = data[:,0:4]
-F = np.mean(data[:,4:6],axis=1)[:,None] - np.mean(data[:,4:6])
+#X = data[:,0:4]
+#F = np.mean(data[:,4:6],axis=1)[:,None] - np.mean(data[:,4:6])
+X = np.vstack((data[:,0:4],data[:,0:4]))
+F = np.vstack((data[:,4:5],data[:,5:6]))
 d = X.shape[1]
 
 # define noise variance
@@ -32,7 +34,7 @@ kern['lengthscale']
 
 # define a model
 m = GPy.models.gp_regression.GPRegression(X, F, kern)
-m['.*noise'].fix(tau2)		# fix the noise variance
+m['.*noise'] #= tau2 #.fix(tau2)		# fix the noise variance
 print m
 
 # optimize the model parameters
