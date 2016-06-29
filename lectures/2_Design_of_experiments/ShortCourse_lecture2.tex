@@ -246,7 +246,7 @@ From 27 observations, we end up with only 9...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-We are now looking for designs of experiments that:
+We will now focus on designs of experiments that:
 \begin{itemize}
 	\item are not model oriented
 	\item give information about every domain of the input space
@@ -258,7 +258,7 @@ We are now looking for designs of experiments that:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
 How can we evaluate if a set of points fills the space?\\ \vspace{5mm}
-\textbf{1. Compute the distance between points}\\
+\textbf{Option 1.} Compute distances between points\\
 \begin{itemize}
 	\item[maximin] the minimum distance between two points of the design should be large:
 	$$\text{Optimisation problem is: \quad} \max_{X_1,\dots,X_n} [ \min_{i \neq j} dist(X_i,X_j) ]$$
@@ -278,7 +278,8 @@ These criteria can be illustrated on a simple 2-dimensional example
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-\textbf{2. Compare the distribution with an uniform distribution}\\
+How can we evaluate if a set of points fills the space?\\ \vspace{2mm}
+\textbf{Option 2.} Compare the distribution with an uniform distribution\\ \vspace{2mm}
 \structure{Discrepency} is a measure of non uniformity. It compares the number of points in a hyper-rectangle with the expected number of samples from a uniform distribution
 \vspace{-2mm}
 \begin{columns}[c]
@@ -297,10 +298,10 @@ Discrepency is defined as the sup of the distance between the empirical and anal
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-Discrepency is often computed by fixing:
+Discrepency is often computed by:
 \begin{itemize}
- 	\item one of the hyper-rectangle summit at the origin
- 	\item the hyper-rectangle centre at the domain centre
+ 	\item fixing one of the hyper-rectangle summit at the origin
+ 	\item centering the hyper-rectangle
  \end{itemize} 
 \begin{center}
 \includegraphics[height=4.5cm]{figures/latexdraw/discrepency3}
@@ -311,7 +312,7 @@ $\rightarrow$ The optimisation is over a finite space
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-We will discuss three types of space filling designs:
+We will now give an overview on three types of space filling designs:
 \begin{itemize}
 	\item Latin hypercubes
 	\item low discrepancy sequences
@@ -331,7 +332,7 @@ These designs have good projection properties
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-A well known example of LHS in 2D is... \pause Sudoku
+A well known example of LHS in 2D is... Sudoku
 \vspace{5mm}
 \begin{center}
 \includegraphics[height=5cm]{figures/sudoku}
@@ -361,23 +362,22 @@ They have to be combined with a criterion such as maximin.
 \begin{frame}{}
 \begin{exampleblock}{Exercise}
 \begin{itemize}
-	\item Generate a 5 points LH in dimension 3.
-	\item How would you program a function $LHD(n,d)$? 
+	\item Generate a 5 points LHD in dimension 3.
+	\item How would you program a function \texttt{LHD(n,d)}? 
+	\item How would you optimize a LHD to ensure it fills the space properly?
 \end{itemize}
 \end{exampleblock}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-\begin{exampleblock}{Exercise}
-How would you optimize LHD?
-\end{exampleblock}
-\pause
-the coordinates of two points can be exchanged:\\
+\begin{exampleblock}{Solution}
+The coordinates of two points can be exchanged:\\
 \vspace{4mm}
 \begin{center}
 \includegraphics[height=4.5cm]{figures/latexdraw/lhs3}
 \end{center}
+\end{exampleblock}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -575,9 +575,8 @@ What would be the designs such that:
 	We consider a linear regression model over $(0,1)$ with one basis function $b(x)=x$ and one observation $X_1$.
 	\begin{enumerate}
 	 	\item Give the expression of $m$ and $v$.
-	 	\item What is the value of $x$ that minimises the maximum of $v$?
-	 	\item Give the expression of the variance of $\hat{\beta}$.
-	 	\item What is the value of $x$ that minimises it?
+	 	\item What is the value of $X_1$ minimizing the maximum of $v$?
+	 	\item What is the value of $X_1$ minimizing the variance of $\hat{\beta}$?
 	 \end{enumerate} 
 	What happen if we have two basis functions $b_0(x)=1$, $b_1(x)=x$ and two observations?
 \end{exampleblock}
