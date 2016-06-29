@@ -75,8 +75,7 @@ IMSE(XS)
 ##                            part 2                            ##
 ##################################################################
 
-## We have a DoE X in [0,1]^4
-X = SobolSequence(40,4)
+## We assume X is your best DoE over [0,1]^4
 
 ## we choose the following parametrization with domain boundaries
 namesNew = ['wing angle', 'wing area','total length', 'wing_l / tail_l ratio']
