@@ -90,12 +90,12 @@ def pvalue(beta,covBeta,X):
 def angle(X):
 	# X is Wing-length, Wing-width, Tail-length, Arm-length
 	# returns the angle (in degrees) between the tail and the wing
-	return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+	return(180/np.pi*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
 
 def armLength(X):
 	# X is Wing-length, Wing-width, Tail-length, angle (in degrees) between the tail and the wing
 	# returns the arm length
-	return(np.sqrt(X[:,0]**2+(X[:,2]-2.5)**2-2*np.cos(X[:,3]*180/np.pi)*X[:,0]*(X[:,2]-2.5))+2.5)
+	return(np.sqrt(X[:,0]**2+(X[:,2]-2.5)**2-2*np.cos(X[:,3]*np.pi/180)*X[:,0]*(X[:,2]-2.5))+2.5)
 
 
 #########################

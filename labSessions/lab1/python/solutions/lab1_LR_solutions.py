@@ -51,6 +51,27 @@ pb.title('flight duration')
 varNoise = .5*np.var(data[:,4]-data[:,5])
 
 
+## More imaginative : plot the helicopters (side view) vivid colors mean long flight duration
+
+## coordinate change
+def angle(X):
+	# X is Wing-length, Wing-width, Tail-length, Arm-length
+	# returns the angle (in degrees) between the tail and the wing
+	return(180/np.pi*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+
+alpha = angle(X)*np.pi/180
+
+pb.figure()
+for i in range(30):    
+    X2 = np.zeros((3,2))
+    X2[1,:] = X[i,0]*np.asarray((np.cos(alpha[i]),np.sin(alpha[i])))
+    X2[2,0] = X[i,2]-2.5
+    pb.plot(X2[:,1],-X2[:,0],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
+    pb.plot(-X2[:,1],-X2[:,0],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
+    pb.plot([0,0],[0,-X[i,2]],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
+    
+pb.axis([-7,7,-10,3])
+
 #########################
 ## Question 2
 
@@ -134,15 +155,75 @@ pb.plot(XS[:,0],F,'kx',mew=1.5)
 ## compute R2
 print "R2 = ", round(R2(XS,F,B,beta)[0],2)
 
-
 #########################
 ## Question 4
 
-## coordinate change
-def angle(X):
-	# X is Wing-length, Wing-width, Tail-length, Arm-length
-	# returns the angle (in degrees) between the tail and the wing
-	return(np.pi/180*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+def B(x):
+	# function returning the matrix of basis functions evaluated at x
+	#input:	  x, np.array with d columns
+	#output:  a matrix (b_j(x_i))_{i,j}
+	b0 = np.ones((x.shape[0],1))
+	b1 = x
+	b2 = x**2
+	B = np.hstack((b0,b1,b2))
+	return(B)
+
+beta,covBeta = LR(X,F,B,varNoise)
+
+def pvalue(beta,covBeta,X):
+	df = X.shape[0] - len(beta)
+	cdf = stats.t.cdf(np.abs(beta[:,0])/np.sqrt(np.diag(covBeta)),df)
+	return(2*(1 - cdf))
+
+## compute R2
+print "R2 = ", round(R2(X,F,B,beta)[0],2)
+print "p-values = ", np.round(pvalue(beta,covBeta,X),2)
+
+
+
+#########################
+## Question 5
+
+## mapping to the new space
+def old2new(X):
+	Y = 0*X
+	Y[:,0] = angle(X)
+	Y[:,1] = X[:,0] * X[:,1]  
+	Y[:,2] = X[:,0] + X[:,2] + X[:,3] 
+	Y[:,3] = X[:,0] / (X[:,2] - 2.5)
+	return(Y)
+
+## mapping to the original space
+def new2old(Y):
+	X = 0*Y
+	f_1 = np.sqrt(1+(1/Y[:,3])**2-2*np.cos(Y[:,0]*np.pi/180)*(1/Y[:,3]))
+	X[:,0] = (Y[:,2]-5) / (1 + 1./Y[:,3] + f_1)
+	X[:,1] = Y[:,1] / X[:,0]
+	X[:,2] = X[:,0] / Y[:,3] + 2.5
+	X[:,3] = Y[:,2] - X[:,0] - X[:,2]
+	return(X)
+
+Xnew = old2new(X)
+namesNew = ['wing angle', 'wing area','total length', 'wing_l / tail_l ratio']
+
+## outputs versus inputs
+pb.figure(figsize=(10,10))
+
+pb.subplot(221)
+pb.plot(Xnew[:,0:1],data[:,4:6],'kx',mew=1.5)
+pb.xlabel(namesNew[0]), pb.ylabel('falling time')
+
+pb.subplot(222)
+pb.plot(Xnew[:,1:2],data[:,4:6],'kx',mew=1.5)
+pb.xlabel(namesNew[1]), pb.ylabel('falling time')
+
+pb.subplot(223)
+pb.plot(Xnew[:,2:3],data[:,4:6],'kx',mew=1.5)
+pb.xlabel(namesNew[2]), pb.ylabel('falling time')
+
+pb.subplot(224)
+pb.plot(Xnew[:,3:4],data[:,4:6],'kx',mew=1.5)
+pb.xlabel(namesNew[3]), pb.ylabel('falling time')
 
 
 def B(x):
@@ -150,86 +231,70 @@ def B(x):
 	#input:	  x, np.array with d columns
 	#output:  a matrix (b_j(x_i))_{i,j}
 	b0 = np.ones((x.shape[0],1))
-	b1 = x[:,0:3]
-	b2 = x[:,2:3]**2
-	b2 = x[:,2:3]**2
+	b1 = x
+	b2 = x[:,3:4]**2
 	B = np.hstack((b0,b1,b2))
 	return(B)
 
-## predict
-g = np.linspace(-0.2,1.2,100)[:,None]
-x = np.hstack((g,g,g,g))
-beta,covBeta = LR(XS,F,B,varNoise)
-m,v = predLR(x,B,beta,covBeta)
+beta,covBeta = LR(Xnew,F,B,varNoise)
 
-## plot model
-pb.figure()
-plotModel(g,m,v)
-pb.plot(XS[:,0],F,'kx',mew=1.5)
-
-## compute R2
-print "R2 = ", round(R2(XS,F,B,beta)[0],2)
+## model validation
+print "R2 = ", round(R2(Xnew,F,B,beta)[0],2)
+print "p-values = ", np.round(pvalue(beta,covBeta,Xnew),2)
 
 
-def pvalue(beta,covBeta,X):
-	df = X.shape[0] - len(beta)
-	cdf = stats.t.cdf(np.abs(beta[:,0])/np.sqrt(np.diag(covBeta)),df)
-	return(2*(1 - cdf))
-
-print "p-values = ", np.round(pvalue(beta,covBeta,XS),2)
-
-
-
-
-
-
-
-## visualisation
-def angle(X):
-	# returns the angle (in degrees) between the tail and the wing
-    return(np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
-
-alpha = angle(X)
-newX = X[:,0:3]
-newX = np.hstack((newX,alpha[:,None]))
-
-def armLength(X):
-	# X is Wing-length, Wing-width, Tail-length, angle
-	# returns the arm length
-	return(np.sqrt(X[:,0]**2+(X[:,2]-2.5)**2-2*np.cos(X[:,3]*180/np.pi)*X[:,0]*(X[:,2]-2.5))+2.5)
-
-al = length(newX) #Back to reality...
-
-
+m,v = predLR(Xnew,B,beta,covBeta)
 
 pb.figure()
-wing_angle = angle(X)/np.pi * 180
-pb.plot(wing_angle,data[:,4],'kx',mew=1.5)
-pb.plot(wing_angle,data[:,5],'kx',mew=1.5)
-pb.ylabel('falling time'), pb.xlabel('wing angle')
+pb.plot(m,F,'kx')
 
-## outputs versus overall length
-pb.figure()
-pb.plot(data[:,0]+data[:,2]+data[:,3],data[:,4],'kx',mew=1.5)
-pb.plot(data[:,0]+data[:,2]+data[:,3],data[:,5],'kx',mew=1.5)
-pb.ylabel('falling time'), pb.xlabel('total length')
+## residuals versus inputs
+pb.figure(figsize=(10,10))
 
+pb.subplot(221)
+pb.plot(X[:,0:1],m-F,'kx',mew=1.5)
+pb.ylabel('residuals'), pb.xlabel(namesNew[0])
 
-## plot the helicopters (side view) vivid colors mean large flight duration
-pb.figure()
-for i in range(30):    
-    X2 = np.zeros((3,2))
-    X2[1,:] = X[i,0]*np.asarray((np.cos(alpha[i]),np.sin(alpha[i])))
-    X2[2,0] = X[i,2]-2.5
-    pb.plot(X2[:,1],-X2[:,0],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
-    pb.plot(-X2[:,1],-X2[:,0],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
-    pb.plot([0,0],[0,-X[i,2]],'g',mew=2,alpha=(F[i]-np.min(F))/(np.max(F)-np.min(F)))
-    
-pb.axis([-7,7,-10,3])
+pb.subplot(222)
+pb.plot(X[:,1:2],m-F,'kx',mew=1.5)
+pb.ylabel('residuals'), pb.xlabel(namesNew[1])
+
+pb.subplot(223)
+pb.plot(X[:,2:3],m-F,'kx',mew=1.5)
+pb.ylabel('residuals'), pb.xlabel(namesNew[2])
+
+pb.subplot(224)
+pb.plot(X[:,3:4],m-F,'kx',mew=1.5)
+pb.ylabel('residuals'), pb.xlabel(namesNew[3])
 
 
-## predict angle
-beta,covBeta = LR(X,F,B,varNoise)
-R2(X,F,B,beta)
-pvalue(beta,covBeta,X)
+#########################
+## Question 6
+
+## domain of interest
+limits = np.array([75,115,20,35,22,32,0.65,1.6]).reshape(4,2).T
+
+## hypercube
+pb.figure(figsize=(10,10))
+
+pb.subplot(221)
+pb.plot(Xnew[:,0:1],data[:,4:6],'kx',mew=1.5)
+pb.axvspan(limits[0,0], limits[1,0], color='b', alpha=0.3, lw=0)
+pb.xlabel(namesNew[0]), pb.ylabel('falling time')
+
+pb.subplot(222)
+pb.plot(Xnew[:,1:2],data[:,4:6],'kx',mew=1.5)
+pb.axvspan(limits[0,1], limits[1,1], color='b', alpha=0.3, lw=0)
+pb.xlabel(namesNew[1]), pb.ylabel('falling time')
+
+pb.subplot(223)
+pb.plot(Xnew[:,2:3],data[:,4:6],'kx',mew=1.5)
+pb.axvspan(limits[0,2], limits[1,2], color='b', alpha=0.3, lw=0)
+pb.xlabel(namesNew[2]), pb.ylabel('falling time')
+
+pb.subplot(224)
+pb.plot(Xnew[:,3:4],data[:,4:6],'kx',mew=1.5)
+pb.axvspan(limits[0,3], limits[1,3], color='b', alpha=0.3, lw=0)
+pb.xlabel(namesNew[3]), pb.ylabel('falling time')
+
 
