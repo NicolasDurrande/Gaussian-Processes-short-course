@@ -65,7 +65,7 @@ Today will be the last lecture
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-Optimization is probably on of the most common problem in engineering. \\
+Optimization is one of the most common problem in engineering. \\
 \vspace{4mm}
 One can distinguish:
 \begin{itemize}
@@ -74,20 +74,19 @@ One can distinguish:
 	\item Robust optimization
 \end{itemize}
 \vspace{5mm}
-In this lecture, the inputs will be \textbf{continuous} variables.
+We usually consider as a reference the  \textbf{minimization} problem.\\
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-The input space of the function to optimize can be continuous or discrete. In this lecture, we will focus on the first case. We will thus not detail methods such as 
+The input space of the function to optimize can be continuous or discrete.  In both case, on can distinguish various types of optimization problems: 
 \begin{itemize}
 	\item Local optimization
 	\item Global optimization
 	\item Robust optimization
 \end{itemize}
 \vspace{5mm}
-We usually consider as a reference the minimization problem.\\
-
+In this lecture, the inputs will be continuous variables.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -236,7 +235,7 @@ The principle of \textbf{evolutionary algorithm} is to consider a population of 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Evolutionary algorithms}
-An famous Evolutionary algorithm for optimization is \textbf{CMA-ES}:\\
+A state of the art evolutionary algorithm for optimization is \textbf{CMA-ES} (Covariance Matrix Adaptation Evolution Strategy): \\
 \vspace{3mm}
 Starting from an initial set of normally distributed points, the algorithm loops over
 \begin{itemize}
@@ -466,7 +465,7 @@ This can be generalised to higher orders \alert{$\rightarrow$} Taylor expansion\
 \begin{frame}{}
 If we now the computational budget in advance, adding new points at the \textbf{best one step ahead location} is not optimal.\\
 \vspace{5mm}
-Some improvements have been made toward
+Some improvements have been made toward this
 \begin{itemize}
 	\item Batch EGO
 	\item Parallelization of the algorithm
@@ -555,6 +554,7 @@ iteration 0
 \includegraphics[height=5cm]{figures/python/ego_EI1n0}
 \end{center}
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[noframenumbering]{Solution 2}
 iteration 1
@@ -564,7 +564,7 @@ iteration 1
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{[noframenumbering]Solution 2}
+\begin{frame}[noframenumbering]{Solution 2}
 iteration 2
 \begin{center}
 \includegraphics[height=5cm]{figures/python/ego_EI1n2}
@@ -653,7 +653,7 @@ iteration 3:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[noframenumbering]{}
-Usual optimization technics such as 
+Usual optimization methods such as 
 \begin{itemize}
 	\item gradient based methods
 	\item evolutionary/genetic algorithms
