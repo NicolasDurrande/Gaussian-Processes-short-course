@@ -81,6 +81,12 @@ IMSE(XS)
 namesNew = ['wing angle', 'wing area','total length', 'wing_l / tail_l ratio']
 limits = np.array([75,115,20,35,22,31,0.65,1.6]).reshape(4,2).T
 
+## coordinate change
+def angle(X):
+	# X is Wing-length, Wing-width, Tail-length, Arm-length
+	# returns the angle (in degrees) between the tail and the wing
+	return(180/np.pi*np.arccos(-1.*((X[:,3]-2.5)**2-(X[:,2]-2.5)**2-X[:,0]**2)/(2*(X[:,2]-2.5)*X[:,0])))
+
 # mapping to the new space
 def old2new(X):
 	Y = 0*X

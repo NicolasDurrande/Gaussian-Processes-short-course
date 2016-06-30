@@ -15,7 +15,7 @@
 \usepackage{enumitem}
 \usepackage[top=2cm, bottom=3cm, left=3cm , right=3cm]{geometry}
 \usepackage{tikz}
-%\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{ulem}
 
 \usetikzlibrary{automata,arrows,positioning,calc}
@@ -36,22 +36,29 @@
 The aim of this lab session is to obtain the best possible GPR model for the data that has been collected \sout{yesterday} during lunch time.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Models with GPy}
-GPy is a python package for Gaussian process models. If you have not already installed it on your computer, we advise that you download the developers version of github:
-\url{https://github.com/SheffieldML/GPy/tree/devel} (there is a link ``Download ZIP'' on the right). The installation steps are: 1. unzip the file; 2. Open a terminal (for example the Anaconda terminal) and go to the unzipped folder; 3. Run the command \texttt{python setup.py install}. You should then be able to import the GPy library.
+\subsection*{GPR with GPy}
+GPy is a python package for Gaussian process models. If you have not already installed it on your computer, we advise that you download the developers version on github \url{https://github.com/SheffieldML/GPy/tree/devel} and follow the instructions.% (there is a link ``Download ZIP'' on the right). The installation steps are: 1. unzip the file; 2. Open a terminal (for example the Anaconda terminal) and go to the unzipped folder; 3. Run the command \texttt{python setup.py install}. You should then be able to import the GPy library.
 
 % \subsection*{Questions}
-\paragraph{Q1.} Import the data you have generated yesterday. If your data is in a csv file where the first 4 columns are the inputs and the last ones the outputs, you should just have to change the csv file name in the script.
+\paragraph{Q1.} Import the data you have generated and choose your favourite parametrization. You may also rescale the data.
 
-\paragraph{Q2.} Write a function that takes a model as input and that returns the leave-one-out predicted values and and their variance. 
+\paragraph{Q2.} 
+The code for creating and optimizing a basic GP model is already given in the python script. Read it carefully to understand each line signification.
 
-\paragraph{Q3.} Try various models and select the best one. When building the models, you may consider changing:
+\paragraph{Q3.} 
+Since you have two (or three) observations for each design point, does-it make sense to use leave-one-out to asses the prediction quality ? Modify the \texttt{leaveOneOut} function accordingly.
+
+\paragraph{Q4.} 
+Write a function that computes the standardised LOO residuals and that compare them to the $\mathcal{N}(0,1)$ distribution.
+
+\paragraph{Q5.} Compute the $Q^2$ and look at the standardized residuals of your first model. Is it convincing ?
+
+\paragraph{Q6.} Try various models and select the best one. When building the models, you may consider changing:
 \begin{itemize}
    	\item the kernel (try various ones and sums of kernels)
-   	\item the way kernel parameters are estimated (staring point for optim, boundaries, ...)
+   	\item the way kernel parameters are estimated (optimization staring point, boundaries, ...)
    	\item the way you take the noise into account (fixed, estimated)
    	\item ...
 \end{itemize}   
-Regarding the choice of the best model, you should consider at least the $Q^2$ criterion and an histogram of standardized residuals.
 
 \end{document}
