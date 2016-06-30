@@ -186,10 +186,6 @@ The steps are:
 	\item[2.] compute the model error at this point
 \end{enumerate}
 This procedure can be repeated for all the design points in order to get a vector of error.\\ \vspace{3mm}
-On the previous example we obtain $MSE = 0.24$ and $Q_2 = 0.34$. \\ \vspace{3mm} 
-\begin{center}
-Why doesn't the model perform as good as previously?
-\end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -226,7 +222,19 @@ Step 3:\\ \vspace{3mm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-It turns out that the error is always computed at the `worst' location!\\ \vspace{5mm}
+If we apply LOO to previous example we obtain:
+ $$MSE = 0.24 \text{ and } Q_2 = 0.34.$$
+Why doesn't the model perform as good as previously?\\
+\vspace{5mm}
+\pause
+It turns out that errors are always computed at the `worst' location!
+\begin{center}
+\includegraphics[height=5cm]{figures/R/VALID_crossval3}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{}
 We can also look at the residual distribution. For leave-one-out, there is no joint distribution for the residuals so they have to be standardised independently. We obtain: 
 \begin{center}
 \includegraphics[height=5cm]{figures/R/VALID_crossvalhist} \qquad
@@ -331,9 +339,10 @@ k(x,y) = \sigma_0^2  x^2 y^2 + k_{rbf1}(x,y) + k_{rbf2}(x,y) + k_{per}(x,y)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Sum of kernels over tensor space}
 \begin{block}{Property}
-\begin{equation}
+\begin{equation*}
 k(x,y) = k_1(x_1,y_1) +  k_2(x_2,y_2)
-\end{equation} is valid covariance structure.\\
+\end{equation*}
+is valid covariance structure.\\
 \begin{columns}[c]
 \begin{column}{3cm}
 \includegraphics[width=3cm]{figures/python/newfromold-sum2-k1}
@@ -352,11 +361,10 @@ $=$
 \end{column}
 \end{columns}
 \vspace{4mm}
-\end{block} \ \\
+\end{block}
 \structure{Remark:}
-\begin{itemize}
- \item From a GP point of view, $k$ is the kernel of $Z(x) = Z_1(x_1) + Z_2(x_2)$
-\end{itemize}
+From a GP point of view, $k$ is the kernel of 
+$$Z(x) = Z_1(x_1) + Z_2(x_2)$$
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -375,7 +383,7 @@ Tensor Additive kernels are very useful for
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Sum of kernels over tensor space}
-We consider the test function $f(x) = \sin( 4 \pi x_1) + \cos( 4 \pi x_2) + 2 x_2$ and a set of 20 observation in $[0,1]^2$ \\ \vspace{5mm}
+We consider the test function $f(x) = \sin( 4 \pi x_1) + \cos( 4 \pi x_2) + 2 x_2$ and a set of 20 observation in $[0,1]^2$. \\ \vspace{5mm}
 \begin{columns}[c]
 \begin{column}{5cm}
 \textbf{Test function}
@@ -425,7 +433,7 @@ RMSE is 0.12
 \begin{equation*}
 \begin{split}
 m(x) & = (k_1(x_1,X_1)+k_2(x_2,X_2)) k(X,X)^{-1} F \\
-& = \underbrace{k_1(x_1,X_1) k(X,X)^{-1} F}_{m_1(x_1)} + \underbrace{k_1(x_1,X_1) k(X,X)^{-1} F}_{m_2(x_2)}
+& = \underbrace{k_1(x_1,X_1) k(X,X)^{-1} F}_{m_1(x_1)} + \underbrace{k_2(x_2,X_2) k(X,X)^{-1} F}_{m_2(x_2)}
 \end{split}
 \end{equation*}
 \end{itemize}
@@ -534,7 +542,7 @@ $=$
 \end{column}
 \end{columns}
 \vspace{5mm}
-Calculation shows we obtain the usual 2D squared exponential kernel.
+Calculation shows this is the usual 2D squared exponential kernel.
 \end{example}
 \end{frame}
 
@@ -667,11 +675,11 @@ Bochner theorem can be used to prove the positive definiteness of many usual sta
   \item the constant function is the Fourier transform of $\delta_{x,y}$ \\
   \qquad $\Rightarrow$ it is psd.
 \end{itemize} \vspace{5mm}
-It can also be generalised to distributions: \vspace{2mm}
-\begin{itemize}
-  \item $\delta_{x,y}$ is the Fourier transform of the constant function \\
-  \qquad $\Rightarrow$ it is psd.
-\end{itemize}
+% It can also be generalised to distributions: \vspace{2mm}
+% \begin{itemize}
+%   \item $\delta_{x,y}$ is the Fourier transform of the constant function \\
+%   \qquad $\Rightarrow$ it is psd.
+% \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
