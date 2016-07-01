@@ -1,4 +1,4 @@
-\beamer@endinputifotherversion {3.36pt}
+\beamer@endinputifotherversion {3.24pt}
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
@@ -6,7 +6,7 @@
 \headcommand {\sectionentry {1}{Introduction}{3}{Introduction}{0}}
 \headcommand {\beamer@sectionpages {1}{2}}
 \headcommand {\beamer@subsectionpages {1}{2}}
-\headcommand {\slideentry {1}{0}{1}{3/3}{}{0}}
+\headcommand {\slideentry {1}{0}{3}{3/3}{}{0}}
 \headcommand {\beamer@framepages {3}{3}}
 \headcommand {\beamer@subsectionentry {0}{1}{1}{4}{}}\headcommand {\beamer@subsectionpages {3}{3}}
 \headcommand {\slideentry {1}{1}{1}{4/4}{}{0}}
@@ -16,7 +16,7 @@
 \headcommand {\sectionentry {2}{Local optimization}{6}{Local optimization}{0}}
 \headcommand {\beamer@sectionpages {3}{5}}
 \headcommand {\beamer@subsectionpages {4}{5}}
-\headcommand {\slideentry {2}{0}{1}{6/6}{}{0}}
+\headcommand {\slideentry {2}{0}{3}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
 \headcommand {\beamer@subsectionentry {0}{2}{1}{7}{}}\headcommand {\beamer@subsectionpages {6}{6}}
 \headcommand {\slideentry {2}{1}{1}{7/7}{}{0}}
@@ -38,7 +38,7 @@
 \headcommand {\sectionentry {3}{Global optim.}{15}{Global optim.}{0}}
 \headcommand {\beamer@sectionpages {6}{14}}
 \headcommand {\beamer@subsectionpages {7}{14}}
-\headcommand {\slideentry {3}{0}{1}{15/15}{}{0}}
+\headcommand {\slideentry {3}{0}{9}{15/15}{}{0}}
 \headcommand {\beamer@framepages {15}{15}}
 \headcommand {\beamer@subsectionentry {0}{3}{1}{16}{}}\headcommand {\beamer@subsectionpages {15}{15}}
 \headcommand {\slideentry {3}{1}{1}{16/16}{}{0}}
@@ -58,7 +58,7 @@
 \headcommand {\sectionentry {4}{Model based optim.}{23}{Model based optimization methods}{0}}
 \headcommand {\beamer@sectionpages {15}{22}}
 \headcommand {\beamer@subsectionpages {16}{22}}
-\headcommand {\slideentry {4}{0}{1}{23/23}{}{0}}
+\headcommand {\slideentry {4}{0}{8}{23/23}{}{0}}
 \headcommand {\beamer@framepages {23}{23}}
 \headcommand {\beamer@subsectionentry {0}{4}{1}{24}{}}\headcommand {\beamer@subsectionpages {23}{23}}
 \headcommand {\slideentry {4}{1}{1}{24/24}{}{0}}
@@ -96,7 +96,7 @@
 \headcommand {\sectionentry {5}{Robust optim.}{40}{Robust optimization}{0}}
 \headcommand {\beamer@sectionpages {23}{39}}
 \headcommand {\beamer@subsectionpages {24}{39}}
-\headcommand {\slideentry {5}{0}{1}{40/40}{}{0}}
+\headcommand {\slideentry {5}{0}{17}{40/40}{}{0}}
 \headcommand {\beamer@framepages {40}{40}}
 \headcommand {\beamer@subsectionentry {0}{5}{1}{41}{}}\headcommand {\beamer@subsectionpages {40}{40}}
 \headcommand {\slideentry {5}{1}{1}{41/41}{}{0}}
@@ -120,7 +120,7 @@
 \headcommand {\sectionentry {6}{Related problems}{50}{Related problems}{0}}
 \headcommand {\beamer@sectionpages {40}{49}}
 \headcommand {\beamer@subsectionpages {41}{49}}
-\headcommand {\slideentry {6}{0}{1}{50/50}{}{0}}
+\headcommand {\slideentry {6}{0}{10}{50/50}{}{0}}
 \headcommand {\beamer@framepages {50}{50}}
 \headcommand {\beamer@subsectionentry {0}{6}{1}{51}{}}\headcommand {\beamer@subsectionpages {50}{50}}
 \headcommand {\slideentry {6}{1}{1}{51/51}{}{0}}
@@ -138,7 +138,7 @@
 \headcommand {\sectionentry {7}{Concl}{57}{Conclusion}{0}}
 \headcommand {\beamer@sectionpages {50}{56}}
 \headcommand {\beamer@subsectionpages {51}{56}}
-\headcommand {\slideentry {7}{0}{1}{57/57}{}{0}}
+\headcommand {\slideentry {7}{0}{7}{57/57}{}{0}}
 \headcommand {\beamer@framepages {57}{57}}
 \headcommand {\beamer@subsectionentry {0}{7}{1}{58}{}}\headcommand {\beamer@subsectionpages {57}{57}}
 \headcommand {\slideentry {7}{1}{1}{58/58}{}{0}}
