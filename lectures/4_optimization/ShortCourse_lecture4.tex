@@ -5,8 +5,11 @@
 \usepackage{amsthm,amssymb,amsbsy,amsmath,amsfonts,amssymb,amscd}
 \usepackage{dsfont}
 \usepackage{array}
+\usepackage{tikz}
 \newcolumntype{N}{@{}m{2pt}@{}}
 \input{../style.tex} 
+
+
 
 \title[Short course on Statistical Modeling for Optimization -- lecture 4/4]{ \small Short course on Statistical Modelling for Optimization -- lecture 4/4 \\ \vspace{3mm} \LARGE Global optimization with GPs}
 \institute[Mines St-\'Etienne]{Nicolas Durrande (durrande@emse.fr) \\ Jean-Charles Croix (jean-charles.croix@emse.fr) \\ Mines St-\'Etienne -- France}
@@ -31,6 +34,8 @@
 }
 \makeatother
 
+\definecolor{Orange}{rgb}{0.8,0.1470,0.0}
+\definecolor{MonBleu}{rgb}{0.212, 0.392, 0.545}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -322,10 +327,84 @@ In the end, we hope that:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
+\structure{Overall framework}
+  \begin{figure}
+    \centering \sf
+    \begin{tikzpicture}[scale=0.7, every node/.style={scale=0.6}]
+     
+      % \tikzstyle{Sim}=[rectangle, draw=MonBleu!20, fill=MonBleu!0];
+      % \tikzstyle{Meta}=[rectangle, draw=Orange!40, fill=MonBleu!0];
+      \tikzstyle{Mes}=[rectangle, draw=violet!20, fill=violet!0];
+
+        \node[Mes](MesIn) at (-6, 0) {
+          \parbox{2.2cm}{ % 
+            \centering
+            \LARGE 
+            \vspace{3mm}
+            $x$
+            \vspace{3mm}
+          }};
+
+        \node[Mes](Mes) at (0, 0) {
+          \parbox{4.5cm}{ % 
+            \centering
+            \LARGE 
+            \vspace{4mm}
+            \textit{costly function}\\
+            \vspace{4mm}
+          }};
+        
+        \node[Mes](MesOut) at (6, 0) {
+        \parbox{4.5cm}{ % 
+            \centering
+            \LARGE 
+            \vspace{3mm}
+          \textit{observations}\\
+            \vspace{3mm}
+        }};
+        \draw[->, very thick, draw=MonBleu] (MesIn) -- (Mes.west);
+        \draw[->, very thick, draw=MonBleu] (Mes) -- (MesOut.west);
+        
+        \node[Mes](MetaIn) at (-6, -4.5) {
+          \parbox{2.2cm}{ % 
+          \centering
+            \LARGE 
+            \vspace{3mm}
+            $x$
+            \vspace{3mm}
+          }};
+        
+        \node[Mes](Meta) at (0, -4.5) {
+          \parbox{4.5cm}{ % 
+            \centering
+            \LARGE 
+            \vspace{4mm}
+            \textit{surrogate model}\\
+            \vspace{4mm}
+          }};
+        
+        \node[Mes](MetaOut) at (6.0, -4.5) {
+        \parbox{4.5cm}{ % 
+            \centering
+            \LARGE 
+            \vspace{3mm}
+          \textit{approximations}\\
+            \vspace{3mm}
+        }};
+        
+        \draw[->, very thick, draw=MonBleu] (MetaIn) -- (Meta.west);
+        \draw[->, very thick, draw=MonBleu] (Meta) -- (MetaOut.west);
+ 
+        \draw[->, very thick, draw=Orange!80] (MesIn) -- (Meta)
+        node [above, midway, sloped, Orange!80] {\large Design of Experiments}; 
+        \draw[->, very thick, draw=Orange!80] (MesOut)  -- (Meta);
+        %node [above, midway, sloped, Orange!80] {\large réponses}; 
+
+    \end{tikzpicture}
+    \end{figure}  
 In practice, it is risky to take decisions based only on the model...\\
 \vspace{3mm} 
 On the other hand, the model can be used to guide us in the research of the optimum. 
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
