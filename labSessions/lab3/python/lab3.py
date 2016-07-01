@@ -7,7 +7,8 @@ pb.ion()
 ##                           helpers                            ##
 ##################################################################
 
-## coordinate change
+
+##            coordinate change            ##
 
 def angle(X):
     # input X is ["Wing-length", "Wing-width", "Tail-length", "Arm-length"]
@@ -37,10 +38,13 @@ def new2old(Y):
 	X[:,3] = Y[:,2] - X[:,0] - X[:,2]
 	return(X)
 
-## error measures
 
-def Q2(F,mX):
-	return(1-sum((F-mX)**2)/sum((F-np.mean(F))**2))
+##         error measures         ##
+
+def Q2(F,Y):
+	# F : vector of target values
+	# Y : vector of predicted values
+	return(1-sum((F.flatten()-Y.flatten())**2)/sum((F.flatten()-np.mean(F))**2))
 
 def leaveOneOut(m):
     n = m.X.shape[0]
@@ -49,10 +53,15 @@ def leaveOneOut(m):
     for i in range(n):
         Xloo = np.delete(m.X,i,0)
         Yloo = np.delete(m.Y,i,0)
-        mloo = GPy.models.gp_regression.GPRegression(Xloo, Yloo, kern.copy())
+        mloo = GPy.models.gp_regression.GPRegression(Xloo, Yloo, m.kern.copy())
         mloo[:] = m[:]
-        mean[i],var[i] = mloo.predict(X[i:i+1,:])
+        mean[i],var[i] = mloo.predict(m.X[i:i+1,:])
     return(mean,var)
+
+
+##################################################################
+##                          Questions                           ##
+##################################################################
 
 
 ##############################

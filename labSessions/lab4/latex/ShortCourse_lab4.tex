@@ -26,30 +26,32 @@
 	{\LARGE \textbf{Lab 4 -- Efficient global optimization}}\\ 
 	\vspace{3mm}
 	{\large Short course on Statistical modelling for optimization\\ \vspace{3mm}}
-	{\normalsize N. Durrande, Universidad Tecnol\'ogica de Pereira, 2015}\\ 
+	{\normalsize N. Durrande - J.C. Croix, Universidad Tecnol\'ogica de Pereira, 2016}\\ 
 	\vspace{3mm}
 	\rule{\textwidth}{1pt}
 	\vspace{5mm}
 \end{center}
-The aim of this lab session is to get the best possible helicopter.
+The aim of this lab session is to obtain the best possible helicopter.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Data}
-Some data from one of the group is provided, as well as one GPR model. If you are not confidemt in your data or in your model, feel free to use them. 
+% \subsection*{Data}
+% Some data from one of the group is provided, as well as one GPR model. If you are not confidemt in your data or in your model, feel free to use them. 
 
 % \subsection*{Questions}
-\paragraph{Q1.} A function \texttt{EI} returning the expected improvement is provided in the file \emph{ShortCourse\_lab4.py}. However, this function is only valid for data that is not noisy. Modify it accordingly using one of the two methods discussed during the lecture.
 
-\paragraph{Q2.} Before computing/optimizing the expected improvement on your data, there is one thing you should not forget... what is it?
+\paragraph{Q1.} First of all, you should make sure you are happy with the model you have and that you have validated both the predicted mean variance. You should also make sure there is no outlier in your data. To help you, these validations are already done on data from last year in the file \emph{lab4.py}.
 
-\paragraph{Q3.} Find the point that maximises the expected improvement. The library\linebreak \texttt{scipy.optimize} should be useful.
+\paragraph{Q2.} Before starting the optimization procedure, there is one important thing you should do... what is it ?
 
-\paragraph{Q4.} Print the corresponding helicopter (check first that it satisfies the constrains).
+\paragraph{Q3.} A function \texttt{EI} returning the expected improvement is provided in the script. However, this function is only valid for data that is not noisy. Modify it accordingly using one of the two methods discussed during the lecture.
 
-\paragraph{Q5.} Run the experiment and update your model
+\paragraph{Q4.} Find the point that maximises the expected improvement. The library\linebreak \texttt{scipy.optimize} should be useful.
 
-\paragraph{Q6.} Loop over Questions 3 to 5. Do not forget to indicate in your report the best parmeters you obtained and the actual recorded time!
+\paragraph{Q5.} Print the corresponding helicopter (check first that it satisfies the constrains).
 
+\paragraph{Q6.} Run the experiment and update your model
 
+\paragraph{Q7.} Loop over Questions 3 to 5. Do not forget to indicate in your report the best parameters you obtained and the actual recorded time!
 
 \end{document}
+

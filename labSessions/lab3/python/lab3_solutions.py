@@ -49,9 +49,9 @@ def leaveOneOut(m):
     for i in range(n):
         Xloo = np.delete(m.X,i,0)
         Yloo = np.delete(m.Y,i,0)
-        mloo = GPy.models.gp_regression.GPRegression(Xloo, Yloo, kern.copy())
+        mloo = GPy.models.gp_regression.GPRegression(Xloo, Yloo, m.kern.copy())
         mloo[:] = m[:]
-        mean[i],var[i] = mloo.predict(X[i:i+1,:])
+        mean[i],var[i] = mloo.predict(m.X[i:i+1,:])
     return(mean,var)
 
 ##############################
@@ -116,9 +116,9 @@ def leaveTwoOut(m):
     for i in range(n/2):
         Xloo = np.delete(m.X,[i,i+n/2],0)
         Yloo = np.delete(m.Y,[i,i+n/2],0)
-        mloo = GPy.models.gp_regression.GPRegression(Xloo, Yloo, kern.copy())
+        mloo = GPy.models.gp_regression.GPRegression(Xloo, Yloo, m.kern.copy())
         mloo[:] = m[:]
-        mean[[i,i+n/2]],var[[i,i+n/2]] = mloo.predict(X[[i,i+n/2],:])
+        mean[[i,i+n/2]],var[[i,i+n/2]] = mloo.predict(m.X[[i,i+n/2],:])
     return(mean,var)
 
 mlto, vlto = leaveTwoOut(m)

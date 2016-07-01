@@ -7,8 +7,10 @@ pb.ion()
 ##############################
 # functions
 
-def Q2(F,mX):
-	return(1-sum((F-mX)**2)/sum((F-np.mean(F))**2))
+def Q2(F,Y):
+	# F : vector of target values
+	# Y : vector of predicted values
+	return(1-sum((F.flatten()-Y.flatten())**2)/sum((F.flatten()-np.mean(F))**2))
 
 # This functions converts the original parameters into the new one:
 # Wl,Ww,Tl,Al -> Wl, Wp (Wing area), Hl (Total helicopter length), Theta (Wing angle)
