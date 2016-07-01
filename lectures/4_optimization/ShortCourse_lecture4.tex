@@ -242,11 +242,22 @@ Starting from an initial set of normally distributed points, the algorithm loops
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Evolutionary algorithms}
-\begin{center}
-\includegraphics[height=6cm]{figures/RLRcmaes}
-\end{center}
-\small Source: talk from R. Le Riche, see also A. Auger et N. Hansen, 2008 
+\begin{frame}{Example: steps of the CMA-ES algorithm}
+\begin{enumerate}
+	\item Sampling ($\lambda$ individuals, $g$ generation) and evaluating:
+	\[
+	x_k^{g+1}=m^g+\sigma^g\mathcal{N}(0,C^g),\;k=1..\lambda\Rightarrow f(x_k^{g+1})
+	\]
+	\item Selection and recombination:
+	\[
+	m^{g+1}=\sum_{i=1}^\mu{w_ix_{i:\lambda}^{g+1}},\sum_{i=1}^\mu{w_i}=1,\;w_1\geq...\geq w_\mu\geq 0
+	\]
+	\item Covariance update (multiple methods...):
+	\[
+	C_\mu^{g+1}=\sum_{i=1}^\mu{w_i(x_{i:\lambda}^{g+1}-m^g)(x_{i:\lambda}^{g+1}-m^g)^T}
+	\]
+\end{enumerate}
+\small Source: The CMA Evolution Strategy: A Tutorial, N. Hansen, 2016 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
