@@ -67,26 +67,19 @@ Today will be the last lecture
 \begin{frame}{}
 Optimization is one of the most common problem in engineering. \\
 \vspace{4mm}
-One can distinguish:
+One can distinguish methodologies:
 \begin{itemize}
 	\item Local optimization
 	\item Global optimization
 	\item Robust optimization
 \end{itemize}
-\vspace{5mm}
-We usually consider as a reference the  \textbf{minimization} problem.\\
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{}
-The input space of the function to optimize can be continuous or discrete.  In both case, on can distinguish various types of optimization problems: 
+and different function input spaces:
 \begin{itemize}
-	\item Local optimization
-	\item Global optimization
-	\item Robust optimization
+	\item Discrete
+	\item Continuous
 \end{itemize}
 \vspace{5mm}
-In this lecture, the inputs will be continuous variables.
+We usually consider as a reference the  \textbf{minimization} problem, and this course is about continuous variables\\
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -227,8 +220,8 @@ A wide variety of global optimization methods have been developed:
 \begin{frame}{Evolutionary algorithms}
 The principle of \textbf{evolutionary algorithm} is to consider a population of points that will change at each time step. The evolution of the population is typically done by:
 \begin{itemize}
-	\item selecting the best points
-	\item combining points together
+	\item selecting the best points (Parents)
+	\item combining points together (Breeding)
 	\item mutations of points
 \end{itemize}
 \end{frame}
