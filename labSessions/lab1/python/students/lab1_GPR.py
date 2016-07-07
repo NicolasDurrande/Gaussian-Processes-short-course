@@ -14,9 +14,9 @@ def kern(X,Y,sigma2=1.,theta=.2):
 
 def kern(X,Y,sigma2=1.,theta=.2):
 	d = np.sqrt(np.sum((X[:,None,:]-Y[None,:,:])**2/theta**2,2))
-	k = sigma2*(1+np.sqrt(3)*d)*np.exp(-np.sqrt(3)*d)
+	k = sigma2*(1+np.sqrt(5)*d+5./3.*d**2)*np.exp(-np.sqrt(5)*d)
 	return(k)
-
+	
 def kern(X,Y,sigma2=1.):
 	k = sigma2*np.ones((X.shape[0],Y.shape[0]))
 	return(k)
