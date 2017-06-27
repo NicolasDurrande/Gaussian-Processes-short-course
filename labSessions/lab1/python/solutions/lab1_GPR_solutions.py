@@ -1,6 +1,6 @@
 import numpy as np
-import pylab as pb
-pb.ion()
+import matplotlib.pyplot as plt
+plt.ion()
 
 #########################
 ## Question 1
@@ -38,10 +38,10 @@ kern = kernMat32
 ## plot kernel
 x = np.linspace(-1,1,200)[:,None]
 y = kern(x,np.zeros((1,1)),1,.2)
-pb.plot(x,y,linewidth=2)
+plt.plot(x,y,linewidth=2)
 
 #########################
-## Question 2-3
+## Question 2
 def sampleGP(x,mu,kern,n,**kwargs):
 	# return n sample paths from a centred GP N(mu,kern) evaluated at x
 	K = kern(x,x,**kwargs)
@@ -50,6 +50,13 @@ def sampleGP(x,mu,kern,n,**kwargs):
 	Z = np.dot(np.dot(KV,np.diag(np.sqrt(Kv))),N)
 	return(mu+Z)
 
+#########################
+## Question 3
+
+x = np.linspace(0,1,200)[:,None]
+Z = sampleGP(x,0*x,kern,3,sigma2=1.,theta=.2)
+
+plt.plot(x,Z)
 
 #########################
 ## Question 4
@@ -75,10 +82,10 @@ def plotModel(x,m,v,**kwargs):
     	v = np.diag(v)
     upper=m+2*np.sqrt(v)
     lower=m-2*np.sqrt(v)
-    pb.plot(x,m,color="#204a87",linewidth=2,**kwargs)
-    pb.fill(np.hstack((x,x[::-1])),np.hstack((upper,lower[::-1])),color="#729fcf",alpha=0.3)
-    pb.plot(x,upper,color="#204a87",linewidth=0.2)
-    pb.plot(x,lower,color="#204a87",linewidth=0.2)
+    plt.plot(x,m,color="#204a87",linewidth=2,**kwargs)
+    plt.fill(np.hstack((x,x[::-1])),np.hstack((upper,lower[::-1])),color="#729fcf",alpha=0.3)
+    plt.plot(x,upper,color="#204a87",linewidth=0.2)
+    plt.plot(x,lower,color="#204a87",linewidth=0.2)
 
 x = np.linspace(0,1,200)[:,None]
 X = np.linspace(.1,.9,5)[:,None]
@@ -87,5 +94,4 @@ F = ftest(X)
 condMean, condVar = GPR(x,X,F,kern,sigma2=1,theta=.2)
 
 plotModel(x,condMean,condVar)
-pb.plot(x,ftest(x))
-
+plt.plot(x,ftest(x))
