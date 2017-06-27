@@ -10,7 +10,7 @@
 
 \title[Short course on Statistical Modelling for Optimization -- lecture 1/4]{ \small Short course Statistical Modelling for Optimization -- lecture 1/4 \\ \vspace{3mm} \LARGE Statistical models in engineering}
 \institute[Mines St-\'Etienne]{Nicolas Durrande (durrande@emse.fr) \\ Jean-Charles Croix (jean-charles.croix@emse.fr) \\ Mines St-\'Etienne -- France}
-\author[Pereira, June 2016]{June 2016 -- Universidad Tecnol\'ogica de Pereira -- Colombia}
+\author[Pereira, June 2017]{June 2017 -- Universidad Tecnol\'ogica de Pereira -- Colombia}
 \date{\null}
 
 \DeclareMathOperator*{\Var}{var}
@@ -101,32 +101,28 @@ The agenda is as follow:
 The course material is available
 \begin{itemize}
 	\item[] webpage: {\small https://sites.google.com/site/nicolasdurrandehomepage}
-	\item[] github: {\small user NicolasDurrande, repo Gaussian-Process-short-Course}
+	\item[] github: {\small user NicolasDurrande, repo Gaussian-Processes-short-Course}
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-The lab session will be on the optimization of paper helicopters:\\
-\vspace{3mm} \
-\hspace{-5mm}\includegraphics[height=6cm]{figures/latexdraw/helico} \quad \includegraphics[height=5.8cm]{figures/helicopter2}
+The lab session will be on the optimization of a catapult simulator:\\
+ \includegraphics[width=\textwidth]{figures/Catapult}
+ \vspace{0.5mm}
 \vspace{4mm}
 \begin{center}
-	\textbf{What values of $(a_l,\ w_l,\ t_l,\ w_w)$ give the longest falling time?}
+	\textbf{What values of $(x_1,\ x_2,\ x_3,\ x_4)$ give the longest throw?}
 \end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-This lab is based on a course of Victor Picheny (INRA) at Mines St-\'Etienne: 
+This lab is based on a numerical simulator. Although the problem is simplistic, it shares a lot with classical engineering problems:
 \begin{itemize}
-	\item[] \small V. Picheny, R. Le Riche, \emph{Revisiting the paper helicopter project using an adaptive surrogate-based approach}, hal-01116601, 2015.
-\end{itemize}
-\vspace{5mm}
-Also the problem is simplistic, it shares a lot with classical engineering problems:
-\begin{itemize}
-	\item the physics is complex $\rightarrow$ no analytical solution
+	\item Black box simulator $\rightarrow$ no analytical solution
+	\item Noisy response (we will be interested in the breesy wind conditions)
 	\item Experiments are ``costly'' $\rightarrow$ data is limited
 	\item ``High dimensional'' input space $\rightarrow$ graphical interpretation is not possible
 \end{itemize}
@@ -145,7 +141,7 @@ The project will be over 4 lab sessions:
 Lab sessions will be in python.
 \vspace{5mm}
 \begin{center}
-	Make sure you bring scissors tomorrow!
+	Make sure you bring computers !
 \end{center}
 \end{frame}
 
@@ -283,7 +279,6 @@ The fact that $f$ is \textbf{costly to evaluate} changes a lot of things...\\
 \end{center}
 \end{frame}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[Statistical models]{Statistical models}
@@ -339,7 +334,8 @@ We will now discuss two types of statistical models:
 \textbf{Linear regression} is probably the most commonly used statistical model.\\ \vspace{3mm}
 Given a set of basis functions $B=(b_0, \dots, b_p)$, we assume that the observations come from the probabilistic model
 $$ F = B(X) \beta  + \varepsilon \qquad \qquad \left( \text{i.e. } F_i = \sum_{k=1}^p \beta_k b_k(X_i) + \varepsilon_i \right) $$
-where the vector $\beta$ is unknown and the $\varepsilon_i$ are independent and identically distributed.
+where the vector $\beta$ is unknown, $\varepsilon_i$ are independent and identically distributed and
+$$ B(X)_{(i,j)}=b_j(X_i) $$
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -408,7 +404,7 @@ What about the distribution of $\hat{\beta}$? \pause
 \begin{itemize}
 	\item Its expectation is $\beta$ \alert{$\Rightarrow$} The estimator is unbiased
 	\item Its covariance matrix is $$(B(X)^t B(X))^{-1} B(X)^t \Cov[\varepsilon,\varepsilon^t] B(X) (B(X)^t B(X))^{-1}$$
-	\item If $\varepsilon$ is multivariate normal, then $\hat{\beta}$ is also multivariate normal.
+	\item If $\varepsilon$ is multivariate normal, then $\hat{\beta}$ is also multivariate normal (not necessarily i.i.d.).
 \end{itemize}
 \end{frame}
 
@@ -459,8 +455,21 @@ $$R^2 =  1 - \frac{\Var[prediction\ errors]}{\Var[data]} = 1 - \frac{\sum_i (F_i
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
+	We've seen that the law of $\hat{\beta}$ is multivariate Gaussian, with its covariance depending on $\varepsilon$:
+	$$(B(X)^t B(X))^{-1} B(X)^t \Cov[\varepsilon,\varepsilon^t] B(X) (B(X)^t B(X))^{-1}$$
+	\textbf{Ordinary regression:} suppose now $\Cov[\varepsilon,\varepsilon^t]=\sigma^2I_d$ then
+	$$ \Cov[\hat{\beta},\hat{\beta}^t] = \sigma^2(B(X)^tB(X))^{-1}$$
+	and from this, we now that
+	$$ \frac{\hat{\beta_i}}{\sqrt{\hat{\sigma}^2(B(X)^tB(X))^{-1}_{(i,i)}}}\text{ is student}$$
+	with the standard variance estimator
+	$$ \hat{\sigma}^2=\frac{1}{n-p}\lVert F-m(X)\rVert^2 $$
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{}
 The influence of one basis function can be tested using \textbf{p-values}:\\
-\qquad $H_0$: The basis function $b_i$ has no influence\\
+\qquad $H_0$: The basis function $b_i$ has no influence (i.e. $\beta_i=0$)\\
 \qquad p-values: probability of observing a larger estimate
 \begin{center}
   \includegraphics[height=4.5cm]{figures/ink_pvalue}
