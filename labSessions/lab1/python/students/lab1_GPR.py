@@ -75,6 +75,8 @@ def ftest(x):
 
 def plotModel(x,m,v,**kwargs):
     x = x.flatten()
+    m = m.flatten()
+    v = np.diag(v)
     upper=m+2*np.sqrt(v)
     lower=m-2*np.sqrt(v)
     plt.plot(x,m,color="#204a87",linewidth=2,**kwargs)

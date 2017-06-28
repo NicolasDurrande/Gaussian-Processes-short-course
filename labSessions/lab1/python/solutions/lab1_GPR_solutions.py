@@ -43,18 +43,23 @@ plt.plot(x,y,linewidth=2)
 #########################
 ## Question 2
 def sampleGP(x,mu,kern,n,**kwargs):
-	# return n sample paths from a centred GP N(mu,kern) evaluated at x
+	# return n sample paths from a GP N(mu(.),kern(.,.)) evaluated at x
+	m = mu(x)
 	K = kern(x,x,**kwargs)
 	Kv, KV = np.linalg.eig(K)
 	N = np.random.normal(0,1,(x.shape[0],n))
 	Z = np.dot(np.dot(KV,np.diag(np.sqrt(Kv))),N)
-	return(mu+Z)
+	return(m+Z)
+
+def mu(x):
+	return(0*x)
 
 #########################
 ## Question 3
 
 x = np.linspace(0,1,200)[:,None]
-Z = sampleGP(x,0*x,kern,3,sigma2=1.,theta=.2)
+
+Z = sampleGP(x,mu,kern,3,sigma2=1.,theta=.2)
 
 plt.plot(x,Z)
 
@@ -78,8 +83,7 @@ def ftest(x):
 def plotModel(x,m,v,**kwargs):
     x = x.flatten()
     m = m.flatten()
-    if v.shape[0]==v.shape[1]:
-    	v = np.diag(v)
+    v = np.diag(v)
     upper=m+2*np.sqrt(v)
     lower=m-2*np.sqrt(v)
     plt.plot(x,m,color="#204a87",linewidth=2,**kwargs)
