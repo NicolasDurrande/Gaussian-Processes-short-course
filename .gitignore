@@ -19,6 +19,7 @@
 *.maf
 *.mtc
 *.mtc1
+*.nav
 *.out
 *.synctex.gz
 *.fdb_latexmk

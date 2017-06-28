@@ -6,7 +6,7 @@
 \usepackage{dsfont}
 \usepackage{array}
 \newcolumntype{N}{@{}m{2pt}@{}}
-\input{../style.tex} 
+\input{../style.tex}
 
 \title[Short course on Statistical Modeling for Optimization -- lecture 2/4]{ \small Short course on Statistical Modelling for Optimization -- lecture 2/4 \\ \vspace{3mm} \LARGE Design of Experiments}
 \institute[Mines St-\'Etienne]{Nicolas Durrande (durrande@emse.fr) \\ Jean-Charles Croix (jean-charles.croix@emse.fr) \\ Mines St-\'Etienne -- France}
@@ -80,7 +80,7 @@ $IMSE = 0.001$ & $IMSE = 0.004$
 	\item Optimal design for a given model
 \end{itemize}
 \vspace{5mm}
-This lecture is based on a course of Victor Picheny (INRA) at Mines St-\'Etienne.\\ 
+This lecture is based on a course of Victor Picheny (INRA) at Mines St-\'Etienne.\\
 \vspace{5mm}
 We have focus in the past lecture on 1-dimensional examples, we have to bear in mind that the input space is often of high dimension ($d$ from 5 to 100).
 \end{frame}
@@ -96,7 +96,7 @@ Intuition is often misleading in high-dimension:
 \includegraphics[height=4cm]{figures/latexdraw/volumedim} \quad
 \includegraphics[height=3.5cm]{figures/python/spf_volume}
 \end{center}
-\end{itemize}	
+\end{itemize}
 \end{exampleblock}
 \end{frame}
 
@@ -106,10 +106,10 @@ Intuition is often misleading in high-dimension:
 \begin{exampleblock}{Examples 2/2}
 \begin{itemize}
 	\item The number of vertices of an hypercube increases faster than we usually think
-\end{itemize}	
+\end{itemize}
 \begin{columns}[c]
 \column{5.5cm}
-\includegraphics[height=4.5cm]{figures/crashtest} 
+\includegraphics[height=4.5cm]{figures/crashtest}
 \column{5cm}
 Testing all combinations of min and max input values for the 50 parameters would require... \pause \\
 
@@ -160,7 +160,7 @@ An intuitive way to check the influence of various variable is to make them chan
   \item[+] require only $d+1$ observations
   \item[+] are easy to interpret
   \item[] \vspace{-4mm}
-  \item[$-$] they can only see linear effects: 
+  \item[$-$] they can only see linear effects:
   \begin{center}
   $m(x)=\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3$
   \end{center}
@@ -197,9 +197,9 @@ The principle of factorial design is to consider all combinations for $x_i \in \
 \begin{itemize}
 	\item[\textbf{pros}] They allow to get all interaction terms:
 \end{itemize}
-	$$\beta_0 + \sum_k \beta_k x_k + \sum_{j,k} \beta_{j,k} x_j x_k  + \beta_{1,2,3} x_1 x_2 x_3$$		
+	$$\beta_0 + \sum_k \beta_k x_k + \sum_{j,k} \beta_{j,k} x_j x_k  + \beta_{1,2,3} x_1 x_2 x_3$$
 \begin{itemize}
-	\item[\textbf{cons}] The number of evaluation is unrealistic when $d$ is large  
+	\item[\textbf{cons}] The number of evaluation is unrealistic when $d$ is large
 \end{itemize}
 \end{columns}
 \end{frame}
@@ -288,7 +288,7 @@ How can we evaluate if a set of points fills the space?\\ \vspace{2mm}
 \includegraphics[height=4cm]{figures/latexdraw/discrepency}
 \end{center}
 \column{6cm}
-\vspace{1mm} 
+\vspace{1mm}
 The probability for a uniform variable to be in $R$ is 0.22 and we observe an empirical probability of $2/11$. The discrepancy (w.r.t. $R$) is then:
 $$D_R = |0.22-2/11| = 0.038$$
 \end{columns}
@@ -302,7 +302,7 @@ Discrepency is often computed by:
 \begin{itemize}
  	\item fixing one of the hyper-rectangle summit at the origin
  	\item centering the hyper-rectangle
- \end{itemize} 
+ \end{itemize}
 \begin{center}
 \includegraphics[height=4.5cm]{figures/latexdraw/discrepency3}
 \end{center}
@@ -363,7 +363,7 @@ They have to be combined with a criterion such as maximin.
 \begin{exampleblock}{Exercise}
 \begin{itemize}
 	\item Generate a 5 points LHD in dimension 3.
-	\item How would you program a function \texttt{LHD(n,d)}? 
+	\item How would you program a function \texttt{LHD(n,d)}?
 	\item How would you optimize a LHD to ensure it fills the space properly?
 \end{itemize}
 \end{exampleblock}
@@ -399,7 +399,7 @@ LHD optimization with simulated annealing:\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Low discrepancy sequences}
-\textbf{Low discrepancy sequences} are deterministic sequences that converge toward the uniform distribution. 
+\textbf{Low discrepancy sequences} are deterministic sequences that converge toward the uniform distribution.
 \begin{itemize}
 	\item They cover the space quickly and evenly
 	\item They are easy to build
@@ -434,7 +434,7 @@ Many low discrepancy sequences can be found in the literature: Halton, Hammerley
 Halton Sequence & uniform pseudo random \\
 \includegraphics[height=5cm]{figures/Halton} & \includegraphics[height=5cm]{figures/random}
   \end{tabular}
- source: wikipedia 
+ source: wikipedia
 \end{center}
 \end{example}
 \end{frame}
@@ -443,7 +443,7 @@ Halton Sequence & uniform pseudo random \\
 \begin{frame}{}
 Issues with low discrepancy sequences:
 \begin{itemize}
-	\item[$-$] there can be alignments when projected 
+	\item[$-$] there can be alignments when projected
 	\item[$-$] there can be holes in subspaces
 	\item[$-$] points may be aligned (Example: 16 first points in basis (17,18))
 \end{itemize}
@@ -483,7 +483,7 @@ $\Rightarrow$ The generative points of CVT can be used as design of experiment.
 \textbf{1. Lloyd's Algorithm}
 \begin{itemize}
 	\item[1] Initialize $X$ as a set of $n$ points
-	\item[2] While $i<nb\_iter$ 
+	\item[2] While $i<nb\_iter$
 	\item[3] \qquad Compute the Voronoi diagram of $X$
 	\item[4] \qquad X = centre of mass of each cell
 \end{itemize}
@@ -518,7 +518,7 @@ This algorithm is much faster than the previous ones and gives a good approximat
 \begin{itemize}
 	\item[1] Initialize $X$ as a set of $n$ points
 	\item[2] Initialize $k$ as a vector of 1 with length $n$
-	\item[3] While $i<nb\_iter$ 
+	\item[3] While $i<nb\_iter$
 	\item[4] \qquad generate one random point $z$ in the input space
 	\item[5] \qquad find the $X_i$ closest to $z$
 	\item[6] \qquad update $X_i = \frac{k_i X_i + z}{k_i+1}$
@@ -577,14 +577,14 @@ What would be the designs such that:
 	 	\item Give the expression of $m$ and $v$.
 	 	\item What is the value of $X_1$ minimizing the maximum of $v$?
 	 	\item What is the value of $X_1$ minimizing the variance of $\hat{\beta}$?
-	 \end{enumerate} 
+	 \end{enumerate}
 	What happen if we have two basis functions $b_0(x)=1$, $b_1(x)=x$ and two observations?
 \end{exampleblock}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
-From the previous example, we can see that 
+From the previous example, we can see that
 \begin{itemize}
 	\item Minimising beta variance $\Leftrightarrow$ Minimising prediction variance
 	\item $X$ only has an influence on the term $(B(X)^t B(X))^{-1}$, which is the covariance matrix of $\hat{\beta}$ (up to a $\sigma^2$ factor)
@@ -640,8 +640,8 @@ Some algorithms (such as Fedorov) are based on one at a time points replacement:
 \begin{itemize}
  	\item[1.] Find the worst point in the Design
  	\item[2.] Find a critic region (large variance)
- 	\item[3.] Replace the ``bad'' point by a point in the critic region 
- \end{itemize} 
+ 	\item[3.] Replace the ``bad'' point by a point in the critic region
+ \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -651,8 +651,8 @@ The three conditions are equivalent
 \begin{itemize}
  	\item A design is D-optimal
  	\item A design is G-optimal
- 	\item The maximum prediction variance is $p$ 
- \end{itemize} 
+ 	\item The maximum prediction variance is $p$
+ \end{itemize}
 \end{block}
 \vspace{5mm}
 Knowing a lower bound allows to define the efficiency of a DoE:
@@ -664,19 +664,19 @@ $$G_{eff} = 100 \times \sqrt{ \frac{\max_x \sigma^2 B(x) (B(X)^t B(X))^{-1} B(x)
 \section[Optimal DoE for GPR]{Optimal design for Gaussian process regression}
 \subsection{}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{}
-As previously, we can discuss two kinds of optimality:
-\begin{itemize}
-	\item In the parameter estimations
-	\item In the prediction variance
-\end{itemize}
-\vspace{5mm}
-We will distinguish two cases: when the covariance parameters are known or not.
-\end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{}
+% As previously, we can discuss two kinds of optimality:
+% \begin{itemize}
+% 	\item In the parameter estimations
+% 	\item In the prediction variance
+% \end{itemize}
+% \vspace{5mm}
+% We will distinguish two cases: when the covariance parameters are known or not.
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{known covariance parameters}
+\begin{frame}{}
 A GP $Z$ with covariance $k$ can be decomposed as a sum of two independent GPs:
 \begin{equation*}
 	\begin{split}
@@ -684,7 +684,7 @@ A GP $Z$ with covariance $k$ can be decomposed as a sum of two independent GPs:
 	k(x,y) &= \underbrace{k(x,X)k(X,X)^{-1}k(X,y)}_{k_X(x,y)} + \underbrace{k(x,y) - k_X(x,y)}_{k_{X^\perp}(x,y)}
 	\end{split}
 \end{equation*}
-\ \\ 
+\ \\
 In order to capture most of the variability of $Z$, we can:
 \begin{itemize}
 	\item Maximize the variability of $Z_C(X)$ and apply previous D/A/E-optimality criterion to $k(X,X)$ instead of $B(X)^tB(X)$.
@@ -698,7 +698,7 @@ If we maximise the determinant of $k(X,X)$ for a 9 points DoE on $(0,1)^2$, we f
 \begin{center}
 \includegraphics[height=5cm]{figures/python/opt_XD}
 \end{center}
-however, this design is not I-optimal nor G-optimal... 
+however, this design is not I-optimal nor G-optimal...
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -713,19 +713,19 @@ We can compute numerically the optimal shrinking factor:
 $\Rightarrow$ They all give a different optimal DoE.
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{unknown covariance parameters}
-What about \textbf{unknown} covariance parameter?\\
-The model parameters (ie the kernel's) can be estimated using maximum likelihood. \\
-\vspace{5mm}
-Can we find a design that gives a good parameter estimation of the variance and lengthscale?
-\begin{itemize}
-	\item There is no strong theoretical results
-	\item Good estimation of the variance requires the points to be far away
-	\item Good estimation of the lengthscale requires the points to be close by
-\end{itemize}
-If the covariance structure itself is unknown, it is interesting to have in the design a large variety of inter-distances.
-\end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{unknown covariance parameters}
+% What about \textbf{unknown} covariance parameter?\\
+% The model parameters (ie the kernel's) can be estimated using maximum likelihood. \\
+% \vspace{5mm}
+% Can we find a design that gives a good parameter estimation of the variance and lengthscale?
+% \begin{itemize}
+% 	\item There is no strong theoretical results
+% 	\item Good estimation of the variance requires the points to be far away
+% 	\item Good estimation of the lengthscale requires the points to be close by
+% \end{itemize}
+% If the covariance structure itself is unknown, it is interesting to have in the design a large variety of inter-distances.
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{}
@@ -842,38 +842,37 @@ It has:
 \begin{frame}{}
 \begin{block}{Design of Experiments Principles}
 	\begin{itemize}
-		\item Control of data generation
-		\item Thinking the experiments choices 
+		\item Control data generation
+		\item Think about which experiment to performed
 	\end{itemize}
 \end{block}
 \vspace{3mm}
 \begin{block}{Objectives}
 	\begin{itemize}
-		\item Measure the influence of the variables 
+		\item Measure the influence of the variables
 		\item Get accurate models
 		\item Get a good inference for the models
 	\end{itemize}
 \end{block}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Measure variables influence}
-The influence of a variable can be estimated by its LR coefficient \\ \vspace{3mm}
-\textbf{additive models:}
-\vspace{1mm}
-The number of points depends on the complexity of the univariate effects (linear quadratic, ...)
-	\begin{itemize}
-		\item star shaped designs
-		\item one at a time designs
-	\end{itemize}
-\vspace{2mm}
-\textbf{Models with interaction}
-\vspace{1mm}
-	\begin{itemize}
-		\item Factorial designs
-	\end{itemize}
-\end{frame}
-
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Measure variables influence}
+% The influence of a variable can be estimated by its LR coefficient \\ \vspace{3mm}
+% \textbf{additive models:}
+% \vspace{1mm}
+% The number of points depends on the complexity of the univariate effects (linear quadratic, ...)
+% 	\begin{itemize}
+% 		\item star shaped designs
+% 		\item one at a time designs
+% 	\end{itemize}
+% \vspace{2mm}
+% \textbf{Models with interaction}
+% \vspace{1mm}
+% 	\begin{itemize}
+% 		\item Factorial designs
+% 	\end{itemize}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Designs without model assumption}
@@ -882,7 +881,7 @@ Designs without model assumption $\rightarrow$ Space filling designs\\ \vspace{3
 	\begin{itemize}
 		\item Latin Hypercubes
 		\item Low discrepancy sequences
-		\item Centroidal voronoi tesselations 
+		\item Centroidal voronoi tesselations
 	\end{itemize}
 \vspace{3mm}
 \textbf{Various criteria} \vspace{1mm}
@@ -914,21 +913,21 @@ For linear regression we have some interesting results... \\
 For GPR, it's much more tricky!
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Designs optimization}
-In general, optimizing DoE is difficult:
-\begin{itemize}
-	\item large number of variables: $n \times d$
-	\item computationally expensive criteria
-\end{itemize}
-\vspace{3mm}
-\textbf{Alternatives are:}
-	\begin{itemize}
-		\item Optimizing in a given class of DoE (LHD)
-		\item Adaptive designs
-		\item E-optimality
-	\end{itemize}
-\end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Designs optimization}
+% In general, optimizing DoE is difficult:
+% \begin{itemize}
+% 	\item large number of variables: $n \times d$
+% 	\item computationally expensive criteria
+% \end{itemize}
+% \vspace{3mm}
+% \textbf{Alternatives are:}
+% 	\begin{itemize}
+% 		\item Optimizing in a given class of DoE (LHD)
+% 		\item Adaptive designs
+% 		\item E-optimality
+% 	\end{itemize}
+% \end{frame}
 
 %Ideas : radar, DoE for additive kriging
 
