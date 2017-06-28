@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from SobolSequence import *
 from sklearn.cluster import KMeans
+from mpl_toolkits.mplot3d import Axes3D
+import sobol_seq
 
 plt.ion()
 
@@ -9,22 +11,25 @@ plt.ion()
 ##                  part 1: useful functions                    ##
 ##################################################################
 
-# generate random uniform numbers
-X = np.random.uniform(0,1,(40,2))
-# generate Sobol Low discrepancy sequence
-XS = SobolSequence(40,2)
+####################################
+## Examples of DoE
 
-# plot them
-plt.figure(figsize=(8,4))
-plt.subplot(121)
-plt.plot(X[:,0],X[:,1],'kx',mew=1.5)
+# random uniform DoE
+X = np.random.uniform(0,1,(40,2))
+
+plt.figure(figsize=(4,4))
+plt.plot(X[:,0],X[:,1],'kx')
 plt.title('random uniform')
-plt.subplot(122)
-plt.plot(XS[:,0],XS[:,1],'bx',mew=1.5)
+
+## Sobol DoE
+XS = sobol_seq.i4_sobol_generate(2,40)
+
+plt.figure(figsize=(4,4))
+plt.plot(XS[:,0],XS[:,1],'kx')
 plt.title('Sobol sequence')
 
 ####################################
-# Various space filling criteria
+# Space filling criteria
 def discrepancy(X):
 	# compute the discrepancy with respect to the center of the domain
 	n,d = X.shape
@@ -103,8 +108,7 @@ X = CVT(20,2)
 
 plt.figure()
 plt.plot(X[:,0],X[:,1],'kx',mew=1.5)
-plt.title('LHS')
-
+plt.title('CVT')
 
 #################
 ## Q3
@@ -112,7 +116,7 @@ plt.title('LHS')
 Xunf = np.random.uniform(0,1,(30,4))
 Xlhs = LHS(30,4)
 Xcvt = CVT(30,4)
-Xsob = SobolSequence(30,4)
+Xsob = sobol_seq.i4_sobol_generate(4,30)
 
 DOE = [Xunf, Xlhs,Xcvt,Xsob]
 CRIT = [discrepancy, maximin, minimax, IMSE]
@@ -125,3 +129,10 @@ for i in range(n_doe):
 		RES[i,j] = CRIT[j](DOE[i])
 
 np.round(RES,2)
+
+###############
+##
+X = Xcvt
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(X[:,0], X[:,1], X[:,2])
