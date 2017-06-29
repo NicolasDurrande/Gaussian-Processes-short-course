@@ -53,7 +53,7 @@ maximin(XS)
 
 def minimax(X):
 	n,d = X.shape
-	G = SobolSequence(100000,d)
+	G = sobol_seq.i4_sobol_generate(d,10000)
 	dXG = np.sum((X[:,None,:]-G[None,:,:])**2,axis=2)
 	dXGmin = np.min(dXG,axis=0)
 	minimax2 = np.max(dXGmin)
@@ -65,7 +65,7 @@ minimax(XS)
 def IMSE(X,theta=.2):
 	# squared exponential kernel is assumed
 	n,d = X.shape
-	G = SobolSequence(50000,d)
+	G = sobol_seq.i4_sobol_generate(d, 50000)
 	dX2 = np.sum((X[:,None,:]-X[None,:,:])**2/theta**2,2)
 	dG2 = np.sum((G[:,None,:]-X[None,:,:])**2/theta**2,2)
 	kX_1 = np.linalg.inv(np.exp(-dX2/2.))
@@ -117,7 +117,7 @@ Xlhs = LHS(30,4)
 Xcvt = CVT(30,4)
 Xsob = sobol_seq.i4_sobol_generate(4,30)
 
-DOE = [Xunf, Xlhs,Xcvt,Xsob]
+DOE = [Xunf, Xlhs, Xcvt, Xsob]
 CRIT = [discrepancy, maximin, minimax, IMSE]
 
 n_doe = len(DOE)
@@ -128,8 +128,6 @@ for i in range(n_doe):
 		RES[i,j] = CRIT[j](DOE[i])
 
 np.round(RES,2)
-
-discrepancy(Xcvt)
 
 ###############
 ##
