@@ -65,7 +65,7 @@ minimax(XS)
 def IMSE(X,theta=.2):
 	# squared exponential kernel is assumed
 	n,d = X.shape
-	G = sobol_seq.i4_sobol_generate(d, 50000)
+	G = sobol_seq.i4_sobol_generate(d, 10000)
 	dX2 = np.sum((X[:,None,:]-X[None,:,:])**2/theta**2,2)
 	dG2 = np.sum((G[:,None,:]-X[None,:,:])**2/theta**2,2)
 	kX_1 = np.linalg.inv(np.exp(-dX2/2.))
