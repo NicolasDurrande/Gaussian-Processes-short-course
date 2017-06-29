@@ -37,7 +37,7 @@ def discrepancy(X):
 	distCentreX = np.sort(np.max(np.abs(Xcentred),axis=1))
 	theoreticalProba = (2*distCentreX)**d
 	empiricalProba = 1.*np.arange(n)/n
-	D = np.hstack((np.abs(theoreticalProba-empiricalProba,theoreticalProba-empiricalProba+1./n)))
+	D = np.abs(np.hstack((theoreticalProba-empiricalProba,theoreticalProba-empiricalProba+1./n)))
 	return(np.max(D))
 
 discrepancy(X)
@@ -129,6 +129,8 @@ for i in range(n_doe):
 		RES[i,j] = CRIT[j](DOE[i])
 
 np.round(RES,2)
+
+discrepancy(Xcvt)
 
 ###############
 ##
