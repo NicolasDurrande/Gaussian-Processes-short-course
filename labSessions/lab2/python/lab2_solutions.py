@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from SobolSequence import *
 from sklearn.cluster import KMeans
 from mpl_toolkits.mplot3d import Axes3D
 import sobol_seq

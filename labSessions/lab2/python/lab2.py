@@ -1,29 +1,34 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from SobolSequence import *
+from mpl_toolkits.mplot3d import Axes3D
+import sobol_seq
 
 plt.ion()
+
 
 ##################################################################
 ##                  part 1: useful functions                    ##
 ##################################################################
 
-# generate random uniform numbers
-X = np.random.uniform(0,1,(40,2))
-# generate Sobol Low discrepancy sequence
-XS = SobolSequence(40,2)
+####################################
+## Examples of DoE
 
-# plot them
-plt.figure(figsize=(8,4))
-plt.subplot(121)
-plt.plot(X[:,0],X[:,1],'kx',mew=1.5)
+# random uniform DoE
+X = np.random.uniform(0,1,(40,2))
+
+plt.figure(figsize=(4,4))
+plt.plot(X[:,0],X[:,1],'kx')
 plt.title('random uniform')
-plt.subplot(122)
-plt.plot(XS[:,0],XS[:,1],'bx',mew=1.5)
+
+## Sobol DoE
+XS = sobol_seq.i4_sobol_generate(2,40)
+
+plt.figure(figsize=(4,4))
+plt.plot(XS[:,0],XS[:,1],'kx')
 plt.title('Sobol sequence')
 
 ####################################
-# Various space filling criteria
+# Space filling criteria
 def discrepancy(X):
 	# compute the discrepancy with respect to the center of the domain
 	n,d = X.shape
@@ -31,7 +36,7 @@ def discrepancy(X):
 	distCentreX = np.sort(np.max(np.abs(Xcentred),axis=1))
 	theoreticalProba = (2*distCentreX)**d
 	empiricalProba = 1.*np.arange(n)/n
-	D = np.hstack((np.abs(theoreticalProba-empiricalProba,theoreticalProba-empiricalProba+1./n)))
+	D = np.abs(np.hstack((theoreticalProba-empiricalProba,theoreticalProba-empiricalProba+1./n)))
 	return(np.max(D))
 
 discrepancy(X)
