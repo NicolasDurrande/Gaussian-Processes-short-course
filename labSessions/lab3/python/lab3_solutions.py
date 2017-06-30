@@ -19,8 +19,8 @@ n, d = X.shape
 # Question 2
 
 # define a kernel
-kern1 = GPy.kern.Linear(input_dim=d)
-kern2 = GPy.kern.RBF(input_dim=d,variance=np.var(F),lengthscale=[.5]*d,ARD=True)
+kern1 = GPy.kern.Bias(d,variance=np.var(F)/2)
+kern2 = GPy.kern.RBF(d,variance=np.var(F)/2,lengthscale=[.5]*d,ARD=True)
 kern = kern1+kern2
 
 print kern
