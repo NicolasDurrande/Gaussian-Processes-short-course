@@ -69,40 +69,6 @@ plt.hist(standardised_error,normed=True)
 x = np.linspace(-3,3,100)
 plt.plot(x,sp.stats.norm.pdf(x))
 
-###################################
-# build GPR model
-limits = np.array([75,115,20,35,22,31,0.65,1.6]).reshape(4,2).T
-Xnew01 = (Xnew-limits[0:1,:])/(limits[1:2,:]-limits[0:1,:])
-F = F-np.mean(F)
-F = -F
-
-Xs = np.vstack((Xnew01,Xnew01))
-Fs = np.vstack((F[:,0:1],F[:,1:2]))
-
-kern = GPy.kern.Matern52(input_dim=d,variance=0.15,lengthscale=[0.5]*4, ARD=True)
-kern['.*lengthscale'].constrain_bounded(0.05,2)
-mopt = GPy.models.gp_regression.GPRegression(Xs, Fs, kern)
-
-
-mopt.optimize_restarts(10)
-print mopt
-mopt['.*lengthscale']
-
-# test 1 quality of mean
-pred_mean , pred_var = leaveTwoOut(mopt)
-print "RMSE =", round(np.sqrt(np.mean(np.square(pred_mean-Fs[:,0]))),2)
-print "Q2 =", round(Q2(Fs , pred_mean),2)
-
-# test 2 quality of confidence intervals
-standardised_error = (pred_mean-Fs[:,0])/np.sqrt(pred_var)
-np.mean(standardised_error) # should be around 0
-np.std(standardised_error)  # should be around 1
-
-pb.figure()
-_ = pb.hist(standardised_error,normed=True)
-x = np.linspace(-3,3,100)
-pb.plot(x,sp.stats.norm.pdf(x))
-
 ##############################
 # Question 1
 
